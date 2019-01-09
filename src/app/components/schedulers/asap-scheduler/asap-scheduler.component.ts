@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { asapScheduler, asyncScheduler } from 'rxjs';
+import { IPageComponent } from '../../../interfaces/page-component.interface';
+import { BasePageComponent } from '../../base-page/base-page.component';
 
 @Component({
   selector: 'app-asap-scheduler',
   templateUrl: './asap-scheduler.component.html',
-  styleUrls: ['./asap-scheduler.component.scss']
+  styleUrls: [ './asap-scheduler.component.scss' ]
 })
-export class AsapSchedulerComponent implements OnInit {
+export class AsapSchedulerComponent extends BasePageComponent implements IPageComponent {
+  public start(): void {
+    super.start();
 
-  constructor() { }
+    const firstScheduledTask = asyncScheduler.schedule(() => {
+      console.log('async resolved!');
+      this.results.push('async resolved!');
+    });
+    this.plug(firstScheduledTask);
 
-  ngOnInit() {
+    const secondScheduledTask = asapScheduler.schedule(() => {
+      console.log('asap resolved!');
+      this.results.push('asap resolved!');
+    });
+    this.plug(secondScheduledTask);
   }
-
 }

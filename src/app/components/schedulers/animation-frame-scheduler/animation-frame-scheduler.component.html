@@ -1,3 +1,46 @@
-<p>
-  animation-frame-scheduler works!
-</p>
+<div class="container">
+  <app-header title="animationFrame" subtitle="aliased as animationFrameScheduler" category="Schedulers"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; animationFrameScheduler &#125; from 'rxjs';
+
+      function task(height) &#123;
+        // `this` references currently executing Action which we reschedule with new state and delay
+        console.log('Setting height to:', height);
+        div.style.height = height + 'px';
+
+        if (height < 50) &#123;
+          this.schedule(height + 1);
+        &#125;
+      &#125;
+
+      animationFrameScheduler.schedule(task, 0, 0);
+
+      // Output: Setting height to: 0
+      // Output: Setting height to: 1
+      // Output: Setting height to: 2
+      // Output: Setting height to: 3
+      // Output: ... until 50
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results">
+    <div class="py-4">
+      <div class="mx-auto example-div" style="background-color: red; width: 50px; border: 1px solid;"></div>
+    </div>
+  </app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+    <p>
+      When <code>animationFrame</code> scheduler is used with delay, it will fall back to
+      <code routerLink="/schedulers/async">async</code> scheduler behaviour.
+    </p>
+    <p>
+      Without delay, <code>animationFrame</code> scheduler can be used to create smooth browser animations.
+      It makes sure scheduled task will happen just before next browser content repaint, thus performing animations as
+      efficiently as possible.
+    </p>
+  </app-documentation>
+</div>

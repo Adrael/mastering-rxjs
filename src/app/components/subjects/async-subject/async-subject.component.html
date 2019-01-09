@@ -1,7 +1,30 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">AsyncSubject</h1>
-</div>
+<div class="container">
+  <app-header title="AsyncSubject" category="Subjects"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
 
-<p>
-  async-subject works!
-</p>
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; AsyncSubject &#125; from 'rxjs';
+
+      const asyncSubject = new AsyncSubject&lt;number&gt;();
+      asyncSubject.subscribe((value: number) => console.log(value));
+      asyncSubject.next(0);
+      asyncSubject.next(1);
+      asyncSubject.next(2);
+      asyncSubject.next(3);
+      asyncSubject.complete();
+
+      // Output: 3
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/class/AsyncSubject">
+    <p>
+      An <code>AsyncSubject</code> emits the last value (and only the last value) emitted by the source Observable,
+      and only after that source Observable completes.
+      (If the source Observable does not emit any values, the <code>AsyncSubject</code> also completes without emitting any values.)
+    </p>
+  </app-documentation>
+</div>

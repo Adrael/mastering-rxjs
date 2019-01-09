@@ -1,0 +1,13 @@
+<div class="card bg-light mb-4">
+  <div class="card-header">&#9737; Results</div>
+
+  <ng-content></ng-content>
+
+  <ul class="list-group list-group-flush" [ngSwitch]="results.length">
+    <li *ngSwitchCase="0" class="list-group-item">No results available</li>
+
+    <ng-container *ngSwitchDefault>
+      <li  class="list-group-item" *ngFor="let result of results" [textContent]="result | json"></li>
+    </ng-container>
+  </ul>
+</div>

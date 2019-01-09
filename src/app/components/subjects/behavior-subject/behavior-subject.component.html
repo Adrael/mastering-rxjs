@@ -1,3 +1,31 @@
-<p>
-  behavior-subject works!
-</p>
+<div class="container">
+  <app-header title="BehaviorSubject" category="Subjects"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; BehaviorSubject &#125; from 'rxjs';
+
+      const behaviorSubject = new BehaviorSubject&lt;number&gt;(null);
+      behaviorSubject.subscribe((value: number) => console.log(value));
+      behaviorSubject.next(0);
+      behaviorSubject.next(1);
+      behaviorSubject.next(2);
+      behaviorSubject.next(3);
+
+      // Output: null
+      // Output: 0
+      // Output: 1
+      // Output: 2
+      // Output: 3
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/class/BehaviorSubject">
+    <p>
+      A <code>BehaviorSubject</code> requires an initial value and emits its current value whenever it is subscribed to.
+    </p>
+  </app-documentation>
+</div>

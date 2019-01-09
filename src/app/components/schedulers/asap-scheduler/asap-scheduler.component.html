@@ -1,3 +1,35 @@
-<p>
-  asap-scheduler works!
-</p>
+<div class="container">
+  <app-header title="asap" subtitle="aliased as asapScheduler" category="Schedulers"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; asapScheduler, asyncScheduler &#125; from 'rxjs';
+
+      const firstScheduledTask = asyncScheduler.schedule(() => console.log('async resolved!'));
+      this.plug(firstScheduledTask);
+
+      const secondScheduledTask = asapScheduler.schedule(() => console.log('asap resolved!'));
+      this.plug(secondScheduledTask);
+
+      // Output: asap resolved!  => asap goes first!
+      // Output: async resolved!
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+    <p>
+      The <code>asap</code> scheduler behaves the same as the <code routerLink="/schedulers/async">async</code> scheduler
+      when you use it to delay task in time. If however you set delay to 0, <code>asap</code> will wait for current
+      synchronously executing code to end and then it will try to execute given task as fast as possible.
+    </p>
+    <p>
+      The <code>asap</code> scheduler will do its best to minimize time between end of currently executing code and start
+      of scheduled task. This makes it best candidate for performing so called "deferring". Traditionally this was
+      achieved by calling <kbd>setTimeout(deferredTask, 0)</kbd>, but that technique involves some (although minimal)
+      unwanted delay.
+    </p>
+  </app-documentation>
+</div>

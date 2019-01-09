@@ -1,3 +1,37 @@
-<p>
-  async-scheduler works!
-</p>
+<div class="container">
+  <app-header title="async" subtitle="aliased as asyncScheduler" category="Schedulers"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; asyncScheduler &#125; from 'rxjs';
+
+      function task(state) &#123;
+        // `this` references currently executing Action which we reschedule with new state and delay
+        this.schedule(++state, 1000);
+      &#125;
+
+      asyncScheduler.schedule(task, 1000, 0);
+
+      // Output: 0
+      // Output: 1
+      // Output: 2
+      // Output: ... until stopped
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+    <p>
+      The <code>async</code> scheduler schedules tasks asynchronously, by putting them on the JavaScript event loop queue.
+      It is best used to delay tasks in time or to schedule tasks repeating in intervals.
+    </p>
+    <p>
+      If you just want to "defer" task, that is to perform it right after currently executing synchronous code ends
+      (commonly achieved by <kbd>setTimeout(deferredTask, 0))</kbd>, better choice will be the
+      <code routerLink="/schedulers/asap">asap</code> scheduler.
+    </p>
+  </app-documentation>
+</div>
+
