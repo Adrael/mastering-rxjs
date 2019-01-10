@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class DocumentationComponent {
   @Input() public link: string;
+  @Input() public marble: string;
 }

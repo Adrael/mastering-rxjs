@@ -1,7 +1,29 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">forkJoin()</h1>
-</div>
+<div class="container">
+  <app-header title="forkJoin()" category="Operators"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
 
-<p>
-  fork-join works!
-</p>
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; forkJoin, interval &#125; from 'rxjs';
+      import &#123; take &#125; from 'rxjs/operators';
+
+      forkJoin(
+        interval(1000).pipe(take(3)), // emit 0, 1, 2 every second and complete
+        interval(500).pipe(take(4)),  // emit 0, 1, 2, 3 every half a second and complete
+      )
+      .subscribe((values: Array&lt;number&gt;) => console.log(values));
+
+      // Output: [2, 3] => after 3 seconds
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/forkJoin"
+                     marble="/assets/forkJoin.png">
+    <p>
+      <code>forkJoin()</code> combine the emissions of multiple Observables together via a specified function and emit
+      single items for each combination based on the results of this function.
+    </p>
+  </app-documentation>
+</div>
