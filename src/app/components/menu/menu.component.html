@@ -1,71 +1,27 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-  <div class="sidebar-sticky">
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>Subjects</span>
-    </h6>
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/subjects/async" routerLinkActive="active">
-          AsyncSubject
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/subjects/behavior" routerLinkActive="active">
-          BehaviorSubject
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/subjects/replay" routerLinkActive="active">
-          ReplaySubject
-        </a>
-      </li>
-    </ul>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search documentation"
+    [ngModel]="filterValue" (ngModelChange)="filterMenuItems($event)">
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>Schedulers</span>
-    </h6>
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/async" routerLinkActive="active">
-          async
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/queue" routerLinkActive="active">
-          queue
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/asap" routerLinkActive="active">
-          asap
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/animationFrame" routerLinkActive="active">
-          animationFrame
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/virtualTime" routerLinkActive="active">
-          VirtualTimeScheduler
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/schedulers/test" routerLinkActive="active">
-          TestScheduler
-        </a>
-      </li>
-    </ul>
+  <div class="sidebar-sticky" [ngSwitch]="menu.length">
+    <ng-container *ngSwitchCase="0">
+      <h6 class="sidebar-heading d-flex justify-content-center align-items-center px-3 mt-4 mb-1 text-muted">
+        No results
+      </h6>
+    </ng-container>
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>Operators</span>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/operators/forkJoin" routerLinkActive="active">
-          forkJoin
-        </a>
-      </li>
-    </ul>
+    <ng-container *ngSwitchDefault>
+      <ng-container *ngFor="let category of menu">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+          [textContent]="category.name"></h6>
+
+        <ul class="nav flex-column">
+          <li class="nav-item" *ngFor="let item of category.items">
+            <a class="nav-link"
+               routerLinkActive="active"
+              [routerLink]="category.link + item.link" [textContent]="item.name"></a>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
   </div>
 </nav>

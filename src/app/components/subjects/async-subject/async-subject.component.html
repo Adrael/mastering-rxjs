@@ -2,6 +2,12 @@
   <app-header title="AsyncSubject" category="Subjects"
               [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
 
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      AsyncSubject&lt;T&gt;(): Subject&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
   <app-example-code>
     <pre class="my-0"><code class="language-ts">
       import &#123; AsyncSubject &#125; from 'rxjs';

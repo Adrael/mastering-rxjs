@@ -1,0 +1,44 @@
+<div class="container">
+  <app-header title="combineLatest()" category="Operators"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      combineLatest&lt;T, ...&gt;(v1: ObservableInput&lt;T&gt;, ..., scheduler?: SchedulerLike): Observable&lt;[T, ...]&gt;;
+
+      combineLatest&lt;T&gt;(array: ObservableInput&lt;T&gt;[], scheduler?: SchedulerLike): Observable&lt;T[]&gt;;
+      combineLatest&lt;R&gt;(array: ObservableInput&lt;any&gt;[], scheduler?: SchedulerLike): Observable&lt;R&gt;;
+      combineLatest&lt;T&gt;(...observables: Array&lt;ObservableInput&lt;T&gt; | SchedulerLike&gt;): Observable&lt;T[]&gt;;
+      combineLatest&lt;T, R&gt;(...observables: Array&lt;ObservableInput&lt;T&gt; | ((...values: Array&lt;T&gt;) =&gt; R) | SchedulerLike&gt;): Observable&lt;R&gt;;
+      combineLatest&lt;R&gt;(...observables: Array&lt;ObservableInput&lt;any&gt; | ((...values: Array&lt;any&gt;) =&gt; R) | SchedulerLike&gt;): Observable&lt;R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; combineLatest, timer &#125; from 'rxjs';
+
+      combineLatest(
+        timer(0, 1000),
+        timer(500, 1000)
+      )
+      .subscribe((values: Array&lt;number&gt;) => console.log(values));
+
+      // Output: [0, 0] => after 0.5s
+      // Output: [1, 0] => after 1s
+      // Output: [1, 1] => after 1.5s
+      // Output: [2, 1] => after 2s
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/combineLatest"
+                     marble="/assets/combineLatest.png">
+    <p>
+      <code>combineLatest()</code> combines multiple Observables to create an Observable whose values are calculated from
+      the latest values of each of its input Observables.
+    </p>
+  </app-documentation>
+</div>

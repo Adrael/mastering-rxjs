@@ -1,6 +1,19 @@
 <div class="container">
-  <app-header title="forkJoin()" category="Operators"
+  <app-header title="forkJoin()" category="Operators" subtitle="Formerly known as zip()"
               [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      // forkJoin([a$, b$, c$]);
+      forkJoin&lt;T&gt;(sources: [ObservableInput&lt;T&gt;]): Observable&lt;T[]&gt;;
+      forkJoin&lt;T, ...&gt;(sources: [ObservableInput&lt;T&gt;, ...]): Observable&lt;[T, ...]&gt;;
+      forkJoin&lt;T&gt;(sources: Array&lt;ObservableInput&lt;T&gt;&gt;): Observable&lt;T[]&gt;;
+      
+      // forkJoin(a$, b$, c$)
+      forkJoin&lt;T&gt;(v1: ObservableInput&lt;T&gt;): Observable&lt;T[]&gt;;
+      forkJoin&lt;T, ...&gt;(v1: ObservableInput&lt;T&gt;, ...): Observable&lt;[T, ...]&gt;;
+    </code></pre>
+  </app-signature>
 
   <app-example-code>
     <pre class="my-0"><code class="language-ts">
@@ -22,7 +35,7 @@
   <app-documentation link="https://rxjs.dev/api/index/function/forkJoin"
                      marble="/assets/forkJoin.png">
     <p>
-      <code>forkJoin()</code> combine the emissions of multiple Observables together via a specified function and emit
+      <code>forkJoin()</code> combines the emissions of multiple Observables together via a specified function and emit
       single items for each combination based on the results of this function.
     </p>
   </app-documentation>

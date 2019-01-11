@@ -1,0 +1,36 @@
+<div class="container">
+  <app-header title="bufferTime()" category="Operators"
+              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      bufferTime&lt;T&gt;(bufferTimeSpan: number, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
+      bufferTime&lt;T&gt;(bufferTimeSpan: number, bufferCreationInterval: number | null | undefined, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
+      bufferTime&lt;T&gt;(bufferTimeSpan: number, bufferCreationInterval: number | null | undefined, maxBufferSize: number, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; bufferTime, map &#125; from 'rxjs/operators';
+
+      // Every 5 seconds, emit the number of click events from the next 2 seconds
+      fromEvent(document, 'click')
+        .pipe(
+          bufferTime(2000, 5000),
+          map((events: Array&lt;MouseEvent&gt;) => events.length)
+        )
+        .subscribe((value: number) => console.log(value));
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results"></app-results>
+
+  <app-documentation link="https://rxjs.dev/api/operators/bufferTime"
+                     marble="/assets/bufferTime.png">
+    <p>
+      <code>bufferTime()</code> collects emitted values until provided time has passed, then emits them as an array.
+    </p>
+  </app-documentation>
+</div>
