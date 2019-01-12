@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import { EmptyComponent } from './pages/empty/empty.component';
 import { BufferTimeComponent } from './pages/operators/buffer-time/buffer-time.component';
 import { CatchErrorComponent } from './pages/operators/catch-error/catch-error.component';
 import { CombineLatestComponent } from './pages/operators/combine-latest/combine-latest.component';
@@ -31,16 +31,16 @@ import { AnimationFrameSchedulerComponent } from './pages/schedulers/animation-f
 import { AsapSchedulerComponent } from './pages/schedulers/asap-scheduler/asap-scheduler.component';
 import { AsyncSchedulerComponent } from './pages/schedulers/async-scheduler/async-scheduler.component';
 import { QueueSchedulerComponent } from './pages/schedulers/queue-scheduler/queue-scheduler.component';
-import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
-import { VirtualTimeSchedulerComponent } from './pages/testing/virtual-time-scheduler/virtual-time-scheduler.component';
 import { AsyncSubjectComponent } from './pages/subjects/async-subject/async-subject.component';
 import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/behavior-subject.component';
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
+import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
+import { VirtualTimeSchedulerComponent } from './pages/testing/virtual-time-scheduler/virtual-time-scheduler.component';
 
 export const APP_ROUTES: Array<Route> = [
   {
     path: '',
-    component: HomeComponent
+    component: EmptyComponent
   },
   {
     path: 'subjects',

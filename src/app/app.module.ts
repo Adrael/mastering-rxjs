@@ -49,6 +49,7 @@ import { VirtualTimeSchedulerComponent } from './pages/testing/virtual-time-sche
 import { AsyncSubjectComponent } from './pages/subjects/async-subject/async-subject.component';
 import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/behavior-subject.component';
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
+import { EmptyComponent } from './pages/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-s
     MergeMapComponent,
     FlatMapComponent,
     SignatureComponent,
-    HomeComponent
+    HomeComponent,
+    EmptyComponent
   ],
   imports: [
     FormsModule,
