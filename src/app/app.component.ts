@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -16,10 +16,10 @@ export class AppComponent implements OnInit {
     this.router
       .events
       .pipe(
-        filter((event: RouterEvent) => event instanceof NavigationStart)
+        filter((event: RouterEvent) => event instanceof NavigationEnd)
       )
-      .subscribe((event: NavigationStart) => {
-        this.hideHomeComponent = (event.url !== '/');
+      .subscribe((event: NavigationEnd) => {
+        this.hideHomeComponent = (event.urlAfterRedirects !== '/');
       });
   }
 }
