@@ -1,15 +1,6 @@
-<ng-container [ngSwitch]="isRunning">
-  <h6 class="text-uppercase mb-0 pt-3 text-muted font-weight-light" [textContent]="category"></h6>
+<h6 class="text-uppercase mb-0 pt-3 text-muted font-weight-light" [textContent]="category"></h6>
 
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <div>
-      <h1 class="h2" [textContent]="title"></h1>
-      <small class="text-muted" *ngIf="subtitle" [innerHTML]="subtitle"></small>
-    </div>
-
-    <div>
-      <button *ngSwitchCase="false" class="btn btn-success" (click)="start()">Run example</button>
-      <button *ngSwitchCase="true" class="btn btn-danger" (click)="stop()">Stop</button>
-    </div>
-  </div>
-</ng-container>
+<div class="pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2" [textContent]="title"></h1>
+  <small class="text-muted" *ngIf="subtitle" [innerHTML]="subtitle"></small>
+</div>

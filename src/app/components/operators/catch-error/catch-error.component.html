@@ -1,6 +1,15 @@
 <div class="container">
-  <app-header title="catchError()" category="Operators" subtitle="Formerly known as <code>catch()</code>"
-              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+  <app-header title="catchError()" category="Operators" subtitle="Formerly known as <code>catch()</code>"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/catchError"
+                     marble="http://reactivex.io/documentation/operators/images/catch.js.png">
+    <p>
+      Gracefully handle errors in an observable sequence.
+    </p>
+    <p>
+      Remember to return an observable from the catchError function!
+    </p>
+  </app-documentation>
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
@@ -10,7 +19,7 @@
   </app-signature>
 
   <app-example-code>
-    <pre class="my-0"><code class="language-ts">
+    <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; of &#125; from 'rxjs';
       import &#123; catchError, map &#125; from 'rxjs/operators';
 
@@ -42,15 +51,5 @@
     </code></pre>
   </app-example-code>
 
-  <app-results [results]="results"></app-results>
-
-  <app-documentation link="https://rxjs.dev/api/operators/catchError"
-                     marble="http://reactivex.io/documentation/operators/images/catch.js.png">
-    <p>
-      Gracefully handle errors in an observable sequence.
-    </p>
-    <p>
-      Remember to return an observable from the catchError function!
-    </p>
-  </app-documentation>
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
 </div>

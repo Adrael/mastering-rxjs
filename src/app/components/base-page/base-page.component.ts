@@ -32,7 +32,8 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
 
     observableLike
       .pipe(takeUntil(this.takeUntilStopped$))
-      .subscribe((data: any) => {
+      .subscribe(
+        (data: any) => {
         if (name) {
           console.log(`${name}:`, data);
           this.results.push(`${name}: ${data}`);
@@ -40,7 +41,14 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
           console.log('Received data:', data);
           this.results.push(data);
         }
-      });
+      },
+        (error: any) => {
+          console.error('Received error:', error);
+        },
+        () => {
+          console.log('Observable has completed!');
+          this.stop();
+        });
   }
 
   public start(): void {

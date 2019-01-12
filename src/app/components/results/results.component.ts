@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-results',
@@ -7,4 +7,16 @@ import { Component, Input } from '@angular/core';
 })
 export class ResultsComponent {
   @Input() public results: Array<any> = [];
+  @Input() public isRunning = false;
+
+  @Output() private readonly onStop = new EventEmitter<void>();
+  @Output() private readonly onStart = new EventEmitter<void>();
+
+  public stop(): void {
+    this.onStop.emit();
+  }
+
+  public start(): void {
+    this.onStart.emit();
+  }
 }

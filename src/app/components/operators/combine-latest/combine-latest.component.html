@@ -1,6 +1,13 @@
 <div class="container">
-  <app-header title="combineLatest()" category="Operators"
-              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+  <app-header title="combineLatest()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/combineLatest"
+                     marble="/assets/combineLatest.png">
+    <p>
+      <code>combineLatest()</code> combines multiple Observables to create an Observable whose values are calculated from
+      the latest values of each of its input Observables.
+    </p>
+  </app-documentation>
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
@@ -15,7 +22,7 @@
   </app-signature>
 
   <app-example-code>
-    <pre class="my-0"><code class="language-ts">
+    <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; combineLatest, timer &#125; from 'rxjs';
 
       combineLatest(
@@ -32,13 +39,5 @@
     </code></pre>
   </app-example-code>
 
-  <app-results [results]="results"></app-results>
-
-  <app-documentation link="https://rxjs.dev/api/index/function/combineLatest"
-                     marble="/assets/combineLatest.png">
-    <p>
-      <code>combineLatest()</code> combines multiple Observables to create an Observable whose values are calculated from
-      the latest values of each of its input Observables.
-    </p>
-  </app-documentation>
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
 </div>

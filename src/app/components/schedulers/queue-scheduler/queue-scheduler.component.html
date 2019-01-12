@@ -1,6 +1,19 @@
 <div class="container">
-  <app-header title="queue" subtitle="aliased as <code>queueScheduler</code>" category="Schedulers"
-              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+  <app-header title="queue" subtitle="aliased as <code>queueScheduler</code>" category="Schedulers"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+    <p>
+      The <code>queue</code> scheduler, when used with delay, behaves the same as
+      <code routerLink="/schedulers/async">async</code> scheduler. When used without delay, it schedules given task
+      synchronously - executes it right when it is scheduled.
+    </p>
+    <p>
+      However when called recursively, that is when inside the scheduled task, another task is scheduled with
+      <code>queue</code> scheduler, instead of executing immediately as well, that task will be put on a queue and wait
+      for current one to finish. This means that when you execute task with queue scheduler, you are sure it will end
+      before any other task scheduled with that scheduler will start.
+    </p>
+  </app-documentation>
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
@@ -9,7 +22,7 @@
   </app-signature>
 
   <app-example-code>
-    <pre class="my-0"><code class="language-ts">
+    <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; queueScheduler &#125; from 'rxjs';
 
       function task(state) &#123;
@@ -32,19 +45,5 @@
     </code></pre>
   </app-example-code>
 
-  <app-results [results]="results"></app-results>
-
-  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
-    <p>
-      The <code>queue</code> scheduler, when used with delay, behaves the same as
-      <code routerLink="/schedulers/async">async</code> scheduler. When used without delay, it schedules given task
-      synchronously - executes it right when it is scheduled.
-    </p>
-    <p>
-      However when called recursively, that is when inside the scheduled task, another task is scheduled with
-      <code>queue</code> scheduler, instead of executing immediately as well, that task will be put on a queue and wait
-      for current one to finish. This means that when you execute task with queue scheduler, you are sure it will end
-      before any other task scheduled with that scheduler will start.
-    </p>
-  </app-documentation>
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
 </div>

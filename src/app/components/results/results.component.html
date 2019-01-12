@@ -1,5 +1,12 @@
 <div class="card bg-light mb-4">
-  <div class="card-header">&#9737; Results</div>
+  <div class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    &#9737; Results
+
+    <div [ngSwitch]="isRunning">
+      <button *ngSwitchCase="false" class="btn btn-sm btn-success" (click)="start()">Run above example</button>
+      <button *ngSwitchCase="true" class="btn btn-sm btn-danger" (click)="stop()">Stop</button>
+    </div>
+  </div>
 
   <ng-content></ng-content>
 

@@ -1,6 +1,14 @@
 <div class="container">
-  <app-header title="ReplaySubject" category="Subjects"
-              [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-header>
+  <app-header title="ReplaySubject" category="Subjects"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/class/ReplaySubject"
+                     marble="http://reactivex.io/documentation/operators/images/S.ReplaySubject.png">
+    <p>
+      The <code>ReplaySubject</code> "replays" or emits old values to new subscribers.
+      It buffers a set number of values and will emit those values immediately to any new subscribers in addition to
+      emitting new values to existing subscribers.
+    </p>
+  </app-documentation>
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
@@ -9,7 +17,7 @@
   </app-signature>
 
   <app-example-code>
-    <pre class="my-0"><code class="language-ts">
+    <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; ReplaySubject &#125; from 'rxjs';
 
       const replaySubject = new ReplaySubject&lt;number&gt;(2);
@@ -33,14 +41,5 @@
     </code></pre>
   </app-example-code>
 
-  <app-results [results]="results"></app-results>
-
-  <app-documentation link="https://rxjs.dev/api/index/class/ReplaySubject"
-                     marble="http://reactivex.io/documentation/operators/images/S.ReplaySubject.png">
-    <p>
-      The <code>ReplaySubject</code> "replays" or emits old values to new subscribers.
-      It buffers a set number of values and will emit those values immediately to any new subscribers in addition to
-      emitting new values to existing subscribers.
-    </p>
-  </app-documentation>
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
 </div>
