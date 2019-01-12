@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { queueScheduler } from 'rxjs';
 import { IPageComponent } from '../../../interfaces/page-component.interface';
-import { BasePageComponent } from '../../base-page/base-page.component';
+import { BasePageComponent } from '../../../components/base-page/base-page.component';
 
 @Component({
   selector: 'app-queue-scheduler',

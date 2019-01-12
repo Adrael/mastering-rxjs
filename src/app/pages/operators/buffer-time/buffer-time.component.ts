@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BasePageComponent} from '../../base-page/base-page.component';
+import {BasePageComponent} from '../../../components/base-page/base-page.component';
 import {IPageComponent} from '../../../interfaces/page-component.interface';
 import {fromEvent} from 'rxjs';
 import {bufferTime, map} from 'rxjs/operators';

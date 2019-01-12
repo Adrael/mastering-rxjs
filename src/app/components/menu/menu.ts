@@ -48,7 +48,14 @@ export const menuCategories: Array<IMenuCategory> = [
       {
         name: 'queue',
         link: 'queue'
-      },
+      }
+    ]
+  },
+
+  {
+    name: 'Testing',
+    link: '/testing/',
+    items: [
       {
         name: 'TestScheduler',
         link: 'test'

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AsyncSubject, BehaviorSubject } from 'rxjs';
 import { IPageComponent } from '../../../interfaces/page-component.interface';
-import { BasePageComponent } from '../../base-page/base-page.component';
+import { BasePageComponent } from '../../../components/base-page/base-page.component';
 
 @Component({
   selector: 'app-behavior-subject',

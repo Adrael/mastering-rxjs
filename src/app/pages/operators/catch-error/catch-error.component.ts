@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BasePageComponent} from '../../base-page/base-page.component';
+import {BasePageComponent} from '../../../components/base-page/base-page.component';
 import {IPageComponent} from '../../../interfaces/page-component.interface';
 import {of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
