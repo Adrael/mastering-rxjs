@@ -46,7 +46,7 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
           console.error('Received error:', error);
         },
         () => {
-          console.log('Observable has completed!');
+          console.warn('Observable has completed!');
           this.stop();
         });
   }

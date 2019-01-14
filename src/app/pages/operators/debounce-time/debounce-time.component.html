@@ -1,3 +1,36 @@
-<p>
-  debounce-time works!
-</p>
+<div class="container">
+  <app-header title="debounceTime()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/debounceTime"
+                     marble="http://reactivex.io/rxjs/img/debounceTime.png">
+    <p>
+      <code>debounceTime()</code> emits a value from the source Observable only after a particular time span has passed
+      without another source emission.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      debounceTime&lt;T&gt;(dueTime: number, scheduler?: SchedulerLike): MonoTypeOperatorFunction&lt;T&gt;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // => Emit the most recent click after a burst of clicks
+
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; debounceTime &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        debounceTime(1000)
+      )
+      .subscribe((event: MouseEvent) => console.log(event));
+
+      // Output: MouseEvent  &#123; ... &#125;
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

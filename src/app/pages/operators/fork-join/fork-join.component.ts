@@ -14,8 +14,8 @@ export class ForkJoinComponent extends BasePageComponent implements IPageCompone
     super.start();
 
     const observable = forkJoin(
-      interval(1000).pipe(take(3)), // emit 0, 1, 2 every second and complete
-      interval(500).pipe(take(4)),  // emit 0, 1, 2, 3 every half a second and complete
+      interval(1000).pipe(take(3)),
+      interval(500).pipe(take(4)),
     );
 
     this.plug(observable);

@@ -1,3 +1,42 @@
-<p>
-  concat works!
-</p>
+<div class="container">
+  <app-header title="concat()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/concat"
+                     marble="/assets/concat.png">
+    <p>
+      <code>concat()</code> creates an output Observable which sequentially emits all values from given Observable and
+      then moves on to the next.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      concat&lt;T, ...&gt;(v1: ObservableInput&lt;T&gt;, ..., scheduler?: SchedulerLike): Observable&lt;T | ...&gt;;
+      concat&lt;T&gt;(...observables: (ObservableInput&lt;T&gt; | SchedulerLike)[]): Observable&lt;T&gt;;
+      concat&lt;T, R&gt;(...observables: (ObservableInput&lt;any&gt; | SchedulerLike)[]): Observable&lt;R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // => Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10
+
+      import &#123; concat, interval, range &#125; from 'rxjs';
+      import &#123; take &#125; from 'rxjs/operators';
+
+      const timer = interval(1000).pipe(take(4));
+      const sequence = range(1, 10);
+      const observable = concat(timer, sequence);
+
+      observable.subscribe((value: number) => console.log(value));
+
+      // Output: 0 => after 1s
+      // Output: 1 => after 2s
+      // Output: 2 => after 3s
+      // Output: 3 => after 4s
+      // Output: 1 ... 10 => immediately
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

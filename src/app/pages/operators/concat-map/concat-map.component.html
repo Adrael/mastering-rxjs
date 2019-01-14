@@ -1,3 +1,40 @@
-<p>
-  concat-map works!
-</p>
+<div class="container">
+  <app-header title="concatMap()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/concatMap"
+                     marble="https://tolikcode.github.io/images/concatMap.png">
+    <p>
+      <code>concatMap()</code> projects each source value to an Observable which is merged in the output Observable,
+      in a serialized fashion waiting for each one to complete before merging the next.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      concatMap&lt;T, R&gt;(project: (value: T, index: number) =>  ObservableInput&lt;R&gt;): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // => For each click event, tick every second from 0 to 3, with no concurrency
+
+      import &#123; concat, interval, range &#125; from 'rxjs';
+      import &#123; take &#125; from 'rxjs/operators';
+
+      import &#123; fromEvent, interval &#125; from 'rxjs';
+      import &#123; concatMap, take &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        concatMap((event: MouseEvent) => interval(1000).pipe(take(4)))
+      )
+      .subscribe((value: number) => console.log(value));
+
+      // For every click on the "document" it will emit values 0 to 3 spaced by a 1000ms interval
+      // Without any concurrency
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

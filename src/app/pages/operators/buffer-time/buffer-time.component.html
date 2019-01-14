@@ -17,10 +17,11 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
+      // => Every 5 seconds, emit the click events from the next 2 seconds
+
       import &#123; fromEvent &#125; from 'rxjs';
       import &#123; bufferTime, map &#125; from 'rxjs/operators';
 
-      // Every 5 seconds, emit the number of click events from the next 2 seconds
       fromEvent(document, 'click')
         .pipe(
           bufferTime(2000, 5000),
