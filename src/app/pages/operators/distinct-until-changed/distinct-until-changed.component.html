@@ -1,3 +1,48 @@
-<p>
-  distinct-until-changed works!
-</p>
+<div class="container">
+  <app-header title="distinctUntilChanged()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/distinctUntilChanged"
+                     marble="http://reactivex.io/rxjs/img/distinctUntilChanged.png">
+    <p>
+      <code>distinctUntilChanged()</code> returns an Observable that emits all items emitted by the source Observable
+      that are distinct by comparison from the previous item.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      distinctUntilChanged&lt;T&gt;(compare?: (x: T, y: T) => boolean): MonoTypeOperatorFunction&lt;T&gt;;
+      distinctUntilChanged&lt;T, K&gt;(compare: (x: K, y: K) => boolean, keySelector: (x: T) => K): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // => Only act when the input data is different according to a predicate
+
+      import &#123; of &#125; from 'rxjs';
+      import &#123; distinctUntilChanged &#125; from 'rxjs/operators';
+
+      interface Person &#123;
+        age: number;
+        name: string;
+      &#125;
+
+      of&lt;Person&gt;(
+        &#123; age: 4, name: 'Foo' &#125;,
+        &#123; age: 7, name: 'Bar' &#125;,
+        &#123; age: 5, name: 'Foo' &#125;,
+        &#123; age: 6, name: 'Foo' &#125;,
+      ).pipe(
+        distinctUntilChanged((a: Person, b: Person) => a.name === b.name),
+      )
+      .subscribe((person: Person) => console.log(person));
+
+      // Output: &#123; age: 4, name: 'Foo' &#125;
+      // Output: &#123; age: 7, name: 'Bar' &#125;
+      // Output: &#123; age: 5, name: 'Foo' &#125;
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>
