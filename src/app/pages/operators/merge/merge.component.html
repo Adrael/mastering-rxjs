@@ -1,3 +1,40 @@
-<p>
-  merge works!
-</p>
+<div class="container">
+  <app-header title="merge()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/merge"
+                     marble="http://reactivex.io/rxjs/img/merge.png">
+    <p>
+      <code>merge()</code> creates an output Observable which concurrently emits all values from every given input
+      Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      merge&lt;T, ...&gt;(v1: ObservableInput&lt;T&gt;, ..., concurrent?: number, scheduler?: SchedulerLike): Observable&lt;T | ...&gt;;
+      merge&lt;T&gt;(...observables: (ObservableInput&lt;T&gt; | SchedulerLike | number)[]): Observable&lt;T&gt;;
+      merge&lt;T, R&gt;(...observables: (ObservableInput&lt;any&gt; | SchedulerLike | number)[]): Observable&lt;R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Merge together two Observables: 1s interval and clicks
+
+      import &#123; fromEvent, interval, merge &#125; from 'rxjs';
+
+      const clicks = fromEvent(document, 'click');
+      const timer = interval(1000);
+
+      merge(clicks, timer)
+      .subscribe((value: number | MouseEvent) =&gt; console.log(value));
+
+      // Output: MouseEvent &#123; ... &#125;
+      // Output: 0
+      // Output: 1
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

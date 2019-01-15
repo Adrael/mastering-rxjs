@@ -1,3 +1,44 @@
-<p>
-  flat-map works!
-</p>
+<div class="container">
+  <app-header title="flatMap()" category="Operators" subtitle="Also known as <code>mergeMap()</code>"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/flatMap"
+                     marble="http://reactivex.io/documentation/operators/images/flatMap.c.png">
+    <p>
+      <code>flatMap()</code> projects each source value to an Observable which is merged in the output Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      flatMap&lt;T, R&gt;(project: (value: T, index: number) =&gt; ObservableInput&lt;R&gt;, concurrent?: number): OperatorFunction&lt;T, R&gt;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Map and flatten each letter to an Observable ticking every 1 second
+
+      import &#123; interval, of &#125; from 'rxjs';
+      import &#123; flatMap, map &#125; from 'rxjs/operators';
+
+      of('a', 'b', 'c')
+      .pipe(
+        flatMap((letter: string) =&gt; &#123;
+          return interval(1000)
+                 .pipe(map((value: number) =&gt; letter + value));
+        &#125;)
+      )
+      .subscribe((result: string) =&gt; console.log(result));
+
+      // Output: a0
+      // Output: b0
+      // Output: c0
+      // Output: a1
+      // Output: b1
+      // Output: c1
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

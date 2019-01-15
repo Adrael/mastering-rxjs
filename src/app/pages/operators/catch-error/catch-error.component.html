@@ -20,26 +20,26 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Continues with a different Observable when there's an error
+      // =&gt; Continues with a different Observable when there's an error
 
       import &#123; of &#125; from 'rxjs';
       import &#123; catchError, map &#125; from 'rxjs/operators';
 
       of(1, 2, 3, 4, 5)
       .pipe(
-        map((value: number) =>  &#123;
+        map((value: number) =&gt;  &#123;
           if (value === 4)  &#123;
             throw new Error('four!');
            &#125;
       
           return value;
          &#125;),
-        catchError((error: any) =>  &#123;
+        catchError((error: any) =&gt;  &#123;
           console.error('Error caught:', error.message);
           return of('I', 'II', 'III', 'IV', 'V');
          &#125;)
       );
-      .subscribe((value: number | string) => console.log(value));
+      .subscribe((value: number | string) =&gt; console.log(value));
 
       // Output: 1
       // Output: 2

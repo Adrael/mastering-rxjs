@@ -11,13 +11,13 @@
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
-      concatMap&lt;T, R&gt;(project: (value: T, index: number) =>  ObservableInput&lt;R&gt;): OperatorFunction&lt;T, R&gt;;
+      concatMap&lt;T, R&gt;(project: (value: T, index: number) =&gt;  ObservableInput&lt;R&gt;): OperatorFunction&lt;T, R&gt;;
     </code></pre>
   </app-signature>
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => For each click event, tick every second from 0 to 3, with no concurrency
+      // =&gt; For each click event, tick every second from 0 to 3, with no concurrency
 
       import &#123; concat, interval, range &#125; from 'rxjs';
       import &#123; take &#125; from 'rxjs/operators';
@@ -27,9 +27,9 @@
 
       fromEvent(document, 'click')
       .pipe(
-        concatMap((event: MouseEvent) => interval(1000).pipe(take(4)))
+        concatMap((event: MouseEvent) =&gt; interval(1000).pipe(take(4)))
       )
-      .subscribe((value: number) => console.log(value));
+      .subscribe((value: number) =&gt; console.log(value));
 
       // For every click on the "document" it will emit values 0 to 3 spaced by a 1000ms interval
       // Without any concurrency

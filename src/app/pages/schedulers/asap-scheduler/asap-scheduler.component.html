@@ -17,7 +17,7 @@
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
-      schedule&lt;T&gt;(work: (this: SchedulerAction&lt;T&gt;, state?: T) => void, delay?: number, state?: T): Subscription;
+      schedule&lt;T&gt;(work: (this: SchedulerAction&lt;T&gt;, state?: T) =&gt; void, delay?: number, state?: T): Subscription;
     </code></pre>
   </app-signature>
 
@@ -25,13 +25,13 @@
     <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; asapScheduler, asyncScheduler &#125; from 'rxjs';
 
-      const firstScheduledTask = asyncScheduler.schedule(() => console.log('async resolved!'));
+      const firstScheduledTask = asyncScheduler.schedule(() =&gt; console.log('async resolved!'));
       this.plug(firstScheduledTask);
 
-      const secondScheduledTask = asapScheduler.schedule(() => console.log('asap resolved!'));
+      const secondScheduledTask = asapScheduler.schedule(() =&gt; console.log('asap resolved!'));
       this.plug(secondScheduledTask);
 
-      // Output: asap resolved!  => asap goes first!
+      // Output: asap resolved!  =&gt; asap goes first!
       // Output: async resolved!
     </code></pre>
   </app-example-code>

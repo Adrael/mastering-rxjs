@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {BasePageComponent} from '../../../components/base-page/base-page.component';
+import {IPageComponent} from '../../../interfaces/page-component.interface';
+import {fromEvent, interval, merge} from 'rxjs';
 
 @Component({
   selector: 'app-merge',
   templateUrl: './merge.component.html',
   styleUrls: ['./merge.component.scss']
 })
-export class MergeComponent implements OnInit {
+export class MergeComponent extends BasePageComponent implements IPageComponent {
+  public start(): void {
+    super.start();
 
-  constructor() { }
+    const clicks = fromEvent(document, 'click');
+    const timer = interval(1000);
+    const observable = merge(clicks, timer);
 
-  ngOnInit() {
+    this.plug(observable);
   }
-
 }
+

@@ -1,3 +1,40 @@
-<p>
-  last works!
-</p>
+<div class="container">
+  <app-header title="last()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/last"
+                     marble="http://reactivex.io/rxjs/img/last.png">
+    <p>
+      <code>last()</code> returns an Observable that emits only the last item emitted by the source Observable.
+      It optionally takes a predicate function as a parameter, in which case, rather than emitting the last item from
+      the source Observable, the resulting Observable will emit the last item from the source Observable that satisfies
+      the predicate.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      last&lt;T, D = T&gt;(predicate?: null, defaultValue?: D): OperatorFunction&lt;T, T | D&gt;;
+      last&lt;T, S extends T&gt;(predicate: (value: T, index: number, source: Observable&lt;T&gt;) =&gt; value is S, defaultValue?: S): OperatorFunction&lt;T, S&gt;;
+      last&lt;T, D = T&gt;(predicate: (value: T, index: number, source: Observable&lt;T&gt;) =&gt; boolean, defaultValue?: D): OperatorFunction&lt;T, T | D&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Emits the last value matching given predicate function
+
+      import &#123; from &#125; from 'rxjs';
+      import &#123; last &#125; from 'rxjs/operators';
+
+      from([1, 2, 3, 4, 5])
+      .pipe(
+        last((value: number) =&gt; value % 2 === 0)
+      )
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: 4
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

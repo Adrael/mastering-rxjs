@@ -17,7 +17,7 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Emit the most recent click after a burst of clicks
+      // =&gt; Emit the most recent click after a burst of clicks
 
       import &#123; fromEvent &#125; from 'rxjs';
       import &#123; debounceTime &#125; from 'rxjs/operators';
@@ -26,7 +26,7 @@
       .pipe(
         debounceTime(1000)
       )
-      .subscribe((event: MouseEvent) => console.log(event));
+      .subscribe((event: MouseEvent) =&gt; console.log(event));
 
       // Output: MouseEvent  &#123; ... &#125;
     </code></pre>

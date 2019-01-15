@@ -19,7 +19,7 @@
       import &#123; BehaviorSubject &#125; from 'rxjs';
 
       const behaviorSubject = new BehaviorSubject&lt;number&gt;(null);
-      behaviorSubject.subscribe((value: number) => console.log(value));
+      behaviorSubject.subscribe((value: number) =&gt; console.log(value));
       behaviorSubject.next(0);
       behaviorSubject.next(1);
       behaviorSubject.next(2);

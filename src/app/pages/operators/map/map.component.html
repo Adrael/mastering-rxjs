@@ -1,3 +1,36 @@
-<p>
-  map works!
-</p>
+<div class="container">
+  <app-header title="map()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/map"
+                     marble="http://reactivex.io/rxjs/img/map.png">
+    <p>
+      <code>map()</code> applies a given <small><kbd>project</kbd></small> function to each value emitted by the source Observable,
+      and emits the resulting values as an Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      map&lt;T, R&gt;(project: (value: T, index: number) =&gt; R, thisArg?: any): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Map every click to the clientX position of that click
+
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; map &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        map((event: MouseEvent) =&gt; event.clientX)
+      )
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: 758
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

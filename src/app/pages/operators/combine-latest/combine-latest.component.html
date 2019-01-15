@@ -23,7 +23,7 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Combine two timer Observables
+      // =&gt; Combine two timer Observables
 
       import &#123; combineLatest, timer &#125; from 'rxjs';
 
@@ -31,12 +31,12 @@
         timer(0, 1000),
         timer(500, 1000)
       )
-      .subscribe((values: Array&lt;number&gt;) => console.log(values));
+      .subscribe((values: Array&lt;number&gt;) =&gt; console.log(values));
 
-      // Output: [0, 0] => after 0.5s
-      // Output: [1, 0] => after 1s
-      // Output: [1, 1] => after 1.5s
-      // Output: [2, 1] => after 2s
+      // Output: [0, 0] =&gt; after 0.5s
+      // Output: [1, 0] =&gt; after 1s
+      // Output: [1, 1] =&gt; after 1.5s
+      // Output: [2, 1] =&gt; after 2s
       // Output: ...
     </code></pre>
   </app-example-code>

@@ -1,6 +1,6 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search documentation"
-    [ngModel]="filterValue" (ngModelChange)="filterMenuItems($event)">
+         [ngModel]="filterValue" (ngModelChange)="filterMenuItems($event)">
 
   <div class="sidebar-sticky" [ngSwitch]="menu.length">
     <ng-container *ngSwitchCase="0">
@@ -12,13 +12,14 @@
     <ng-container *ngSwitchDefault>
       <ng-container *ngFor="let category of menu">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-          [textContent]="category.name"></h6>
+            [textContent]="category.name"></h6>
 
         <ul class="nav flex-column">
           <li class="nav-item" *ngFor="let item of category.items">
             <a class="nav-link"
                routerLinkActive="active"
-              [routerLink]="category.link + item.link" [textContent]="item.name"></a>
+               #menuItem
+               [routerLink]="category.link + item.link" [textContent]="item.name"></a>
           </li>
         </ul>
       </ng-container>

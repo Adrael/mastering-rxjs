@@ -1,3 +1,38 @@
-<p>
-  first works!
-</p>
+<div class="container">
+  <app-header title="first()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/first"
+                     marble="http://reactivex.io/rxjs/img/first.png">
+    <p>
+      <code>first()</code> emits only the first value (or the first value that meets some condition) emitted by the
+      source Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      first&lt;T, D = T&gt;(predicate?: null, defaultValue?: D): OperatorFunction&lt;T, T | D&gt;;
+      first&lt;T, S extends T&gt;(predicate: (value: T, index: number, source: Observable&lt;T&gt;) =&gt; value is S, defaultValue?: S): OperatorFunction&lt;T, S&gt;;
+      first&lt;T, D = T&gt;(predicate: (value: T, index: number, source: Observable&lt;T&gt;) =&gt; boolean, defaultValue?: D): OperatorFunction&lt;T, T | D&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Emits the first click that happens on a DIV
+
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; first &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        first((event: MouseEvent) =&gt; (&lt;HTMLElement&gt;event.target).tagName === 'DIV')
+      )
+      .subscribe((event: MouseEvent) =&gt; console.log(event));
+
+      // Output: MouseEvent  &#123; ... &#125;
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

@@ -17,7 +17,7 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Every 5 seconds, emit the click events from the next 2 seconds
+      // =&gt; Every 5 seconds, emit the click events from the next 2 seconds
 
       import &#123; fromEvent &#125; from 'rxjs';
       import &#123; bufferTime, map &#125; from 'rxjs/operators';
@@ -25,9 +25,9 @@
       fromEvent(document, 'click')
         .pipe(
           bufferTime(2000, 5000),
-          map((events: Array&lt;MouseEvent&gt;) => events.length)
+          map((events: Array&lt;MouseEvent&gt;) =&gt; events.length)
         )
-        .subscribe((value: number) => console.log(value));
+        .subscribe((value: number) =&gt; console.log(value));
     </code></pre>
   </app-example-code>
 

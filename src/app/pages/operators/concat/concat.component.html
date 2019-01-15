@@ -19,7 +19,7 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10
+      // =&gt; Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10
 
       import &#123; concat, interval, range &#125; from 'rxjs';
       import &#123; take &#125; from 'rxjs/operators';
@@ -28,13 +28,13 @@
       const sequence = range(1, 10);
       const observable = concat(timer, sequence);
 
-      observable.subscribe((value: number) => console.log(value));
+      observable.subscribe((value: number) =&gt; console.log(value));
 
-      // Output: 0 => after 1s
-      // Output: 1 => after 2s
-      // Output: 2 => after 3s
-      // Output: 3 => after 4s
-      // Output: 1 ... 10 => immediately
+      // Output: 0 =&gt; after 1s
+      // Output: 1 =&gt; after 2s
+      // Output: 2 =&gt; after 3s
+      // Output: 3 =&gt; after 4s
+      // Output: 1 ... 10 =&gt; immediately
     </code></pre>
   </app-example-code>
 

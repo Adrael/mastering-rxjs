@@ -11,14 +11,14 @@
 
   <app-signature>
     <pre class="my-0"><code class="language-ts">
-      distinctUntilChanged&lt;T&gt;(compare?: (x: T, y: T) => boolean): MonoTypeOperatorFunction&lt;T&gt;;
-      distinctUntilChanged&lt;T, K&gt;(compare: (x: K, y: K) => boolean, keySelector: (x: T) => K): MonoTypeOperatorFunction&lt;T&gt;;
+      distinctUntilChanged&lt;T&gt;(compare?: (x: T, y: T) =&gt; boolean): MonoTypeOperatorFunction&lt;T&gt;;
+      distinctUntilChanged&lt;T, K&gt;(compare: (x: K, y: K) =&gt; boolean, keySelector: (x: T) =&gt; K): MonoTypeOperatorFunction&lt;T&gt;;
     </code></pre>
   </app-signature>
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Only act when the input data is different according to a predicate
+      // =&gt; Only act when the input data is different according to a predicate
 
       import &#123; of &#125; from 'rxjs';
       import &#123; distinctUntilChanged &#125; from 'rxjs/operators';
@@ -34,9 +34,9 @@
         &#123; age: 5, name: 'Foo' &#125;,
         &#123; age: 6, name: 'Foo' &#125;,
       ).pipe(
-        distinctUntilChanged((a: Person, b: Person) => a.name === b.name),
+        distinctUntilChanged((a: Person, b: Person) =&gt; a.name === b.name),
       )
-      .subscribe((person: Person) => console.log(person));
+      .subscribe((person: Person) =&gt; console.log(person));
 
       // Output: &#123; age: 4, name: 'Foo' &#125;
       // Output: &#123; age: 7, name: 'Bar' &#125;

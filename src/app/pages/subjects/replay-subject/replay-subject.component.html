@@ -23,11 +23,11 @@
       const replaySubject = new ReplaySubject&lt;number&gt;(2);
       replaySubject.next(0);
       replaySubject.next(1);
-      replaySubject.subscribe((value: number) => console.log('First:', value));
+      replaySubject.subscribe((value: number) =&gt; console.log('First:', value));
       replaySubject.next(2);
-      replaySubject.subscribe((value: number) => console.log('Second:', value));
+      replaySubject.subscribe((value: number) =&gt; console.log('Second:', value));
       replaySubject.next(3);
-      replaySubject.subscribe((value: number) => console.log('Third:', value));
+      replaySubject.subscribe((value: number) =&gt; console.log('Third:', value));
 
       // Output: First: 0
       // Output: First: 1

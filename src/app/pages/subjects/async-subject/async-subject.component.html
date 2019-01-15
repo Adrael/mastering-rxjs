@@ -21,7 +21,7 @@
       import &#123; AsyncSubject &#125; from 'rxjs';
 
       const asyncSubject = new AsyncSubject&lt;number&gt;();
-      asyncSubject.subscribe((value: number) => console.log(value));
+      asyncSubject.subscribe((value: number) =&gt; console.log(value));
       asyncSubject.next(0);
       asyncSubject.next(1);
       asyncSubject.next(2);

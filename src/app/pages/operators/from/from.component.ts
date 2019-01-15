@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {BasePageComponent} from '../../../components/base-page/base-page.component';
+import {IPageComponent} from '../../../interfaces/page-component.interface';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-from',
   templateUrl: './from.component.html',
   styleUrls: ['./from.component.scss']
 })
-export class FromComponent implements OnInit {
+export class FromComponent extends BasePageComponent implements IPageComponent {
+  public start(): void {
+    super.start();
 
-  constructor() { }
+    const observable = from([10, 20, 30]);
 
-  ngOnInit() {
+    this.plug(observable);
   }
-
 }

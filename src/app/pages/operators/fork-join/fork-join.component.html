@@ -24,7 +24,7 @@
 
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // => Use forkJoin with operator emitting after some time
+      // =&gt; Use forkJoin with operator emitting after some time
 
       import &#123; forkJoin, interval &#125; from 'rxjs';
       import &#123; take &#125; from 'rxjs/operators';
@@ -33,9 +33,9 @@
         interval(1000).pipe(take(3)), // emit 0, 1, 2 every second and complete
         interval(500).pipe(take(4)),  // emit 0, 1, 2, 3 every half a second and complete
       )
-      .subscribe((values: Array&lt;number&gt;) => console.log(values));
+      .subscribe((values: Array&lt;number&gt;) =&gt; console.log(values));
 
-      // Output: [2, 3] => after 3 seconds
+      // Output: [2, 3] =&gt; after 3 seconds
     </code></pre>
   </app-example-code>
 
