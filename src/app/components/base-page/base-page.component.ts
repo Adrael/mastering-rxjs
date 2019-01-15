@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { IPageComponent } from '../../interfaces/page-component.interface';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {IPageComponent} from '../../interfaces/page-component.interface';
 
 declare var Prism: any;
 type ObservableLike<T> = Observable<T> | Subject<T>;
@@ -24,33 +24,6 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
     this.stop();
   }
 
-  protected plug(observableLike: ObservableLike<any> | Subscription, name?: string): void {
-    if (observableLike instanceof Subscription) {
-      this.ongoingSubscriptions.add(observableLike);
-      return;
-    }
-
-    observableLike
-      .pipe(takeUntil(this.takeUntilStopped$))
-      .subscribe(
-        (data: any) => {
-        if (name) {
-          console.log(`${name}:`, data);
-          this.results.push(`${name}: ${data}`);
-        } else {
-          console.log('Received data:', data);
-          this.results.push(data);
-        }
-      },
-        (error: any) => {
-          console.error('Received error:', error);
-        },
-        () => {
-          console.warn('Observable has completed!');
-          this.stop();
-        });
-  }
-
   public start(): void {
     this.isRunning = true;
     this.ongoingSubscriptions = new Subscription();
@@ -66,5 +39,38 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
     }
 
     this.ongoingSubscriptions = null;
+  }
+
+  protected plug(observableLike: ObservableLike<any> | Subscription, name?: string, consoleOnly?: boolean): void {
+    if (observableLike instanceof Subscription) {
+      this.ongoingSubscriptions.add(observableLike);
+      return;
+    }
+
+    observableLike
+      .pipe(takeUntil(this.takeUntilStopped$))
+      .subscribe(
+        (data: any) => {
+          if (name) {
+            console.log(`${name}:`, data);
+            this.results.push(`${name}: ${data}`);
+            return;
+          }
+
+          if (!consoleOnly) {
+            this.results.push(data);
+          } else {
+            this.results.push(`Open your browser's DevTools to see the results`);
+          }
+
+          console.log('Received data:', data);
+        },
+        (error: any) => {
+          console.error('Received error:', error);
+        },
+        () => {
+          console.warn('Observable has completed!');
+          this.stop();
+        });
   }
 }

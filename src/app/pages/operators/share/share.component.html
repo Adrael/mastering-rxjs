@@ -1,3 +1,59 @@
-<p>
-  share works!
-</p>
+<div class="container">
+  <app-header title="share()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/share"
+                     marble="http://reactivex.io/rxjs/img/share.png">
+    <p>
+      <code>share()</code> returns a new Observable that multi-casts (shares) the original Observable.
+      As long as there is at least one Subscriber this Observable will be subscribed and emitting data.
+      When all subscribers have unsubscribed it will unsubscribe from the source Observable. Because the Observable is
+      multi-casting it makes the stream hot. This is an alias for
+      <small><kbd>multicast(() => new Subject()), refCount()</kbd></small>.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      share&lt;T&gt;(): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Multiple subscribers sharing source
+
+      import &#123; timer &#125; from 'rxjs';
+      import &#123; tap, mapTo, share &#125; from 'rxjs/operators';
+
+      const source = timer(1000); // Emit value in 1s
+
+      // Log side effect, emit result
+      const example = source.pipe(
+        tap(() =&gt; console.log('***SIDE EFFECT***')),
+        mapTo('***RESULT***')
+      );
+      
+      // NOT SHARED, SIDE EFFECT WILL BE EXECUTED TWICE
+      const subscribe = example.subscribe((value: string) =&gt; console.log(value));
+      const subscribeTwo = example.subscribe((value: string) =&gt; console.log(value));
+
+      // Output: "***SIDE EFFECT***"
+      // Output: "***RESULT***"
+      // Output: "***SIDE EFFECT***"
+      // Output: "***RESULT***"
+      
+      // Share observable among subscribers
+      const sharedExample = example.pipe(share());
+
+      // SHARED, SIDE EFFECT EXECUTED ONCE
+      const subscribeThree = sharedExample.subscribe((value: string) =&gt; console.log(value));
+      const subscribeFour = sharedExample.subscribe((value: string) =&gt; console.log(value));
+
+      // Output: "***SIDE EFFECT***"
+      // Output: "***RESULT***"
+      // Output: "***RESULT***"
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>
