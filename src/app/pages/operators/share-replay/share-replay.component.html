@@ -1,3 +1,43 @@
-<p>
-  share-replay works!
-</p>
+<div class="container">
+  <app-header title="shareReplay()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/shareReplay"
+                     marble="http://reactivex.io/documentation/operators/images/replay.c.png">
+    <p>
+      <code>shareReplay()</code> shares source and replay specified number of emissions on subscription.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      shareReplay&gt;T&gt;(bufferSize?: number, windowTime?: number, scheduler?: SchedulerLike): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      import &#123; interval &#125; from 'rxjs';
+      import &#123; shareReplay, take &#125; from 'rxjs/operators';
+
+      const observable = interval(1000)
+      .pipe(
+        take(4),
+        shareReplay(3)
+      );
+
+      observable.subscribe(x =&gt; console.log('A:', x));
+      observable.subscribe(y =&gt; console.log('B:', y));
+
+      // Output: "A: 0"
+      // Output: "B: 0"
+      // Output: "A: 1"
+      // Output: "B: 1"
+      // Output: "A: 2"
+      // Output: "B: 2"
+      // Output: "A: 3"
+      // Output: "B: 3"
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>
