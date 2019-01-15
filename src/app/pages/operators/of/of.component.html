@@ -1,3 +1,35 @@
-<p>
-  of works!
-</p>
+<div class="container">
+  <app-header title="of()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/of"
+                     marble="http://reactivex.io/rxjs/img/of.png">
+    <p>
+      <code>of()</code> converts the arguments to an observable sequence.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      of&lt;T&gt;(a: T, scheduler?: SchedulerLike): Observable&lt;T&gt;;
+      of&lt;T, T2&gt;(a: T, b: T2, scheduler?: SchedulerLike): Observable&lt;T | T2&gt;;
+      of&lt;T&gt;(...args: Array&lt;T | SchedulerLike&gt;): Observable&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Emit the values `10, 20, 30`
+
+      import &#123; of &#125; from 'rxjs';
+
+      of(10, 20, 30)
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: 10
+      // Output: 20
+      // Output: 30
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

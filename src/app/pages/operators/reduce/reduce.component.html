@@ -1,3 +1,40 @@
-<p>
-  reduce works!
-</p>
+<div class="container">
+  <app-header title="reduce()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/operators/reduce"
+                     marble="http://reactivex.io/rxjs/img/reduce.png">
+    <p>
+      <code>reduce()</code> applies an accumulator function over the source Observable, and returns the accumulated
+      result when the source completes, given an optional seed value.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      reduce&lt;T&gt;(accumulator: (acc: T, value: T, index: number) =&gt; T, seed?: T): MonoTypeOperatorFunction&lt;T&gt;;
+      reduce&lt;T&gt;(accumulator: (acc: T[], value: T, index: number) =&gt; T[], seed: T[]): OperatorFunction&lt;T, T[]&gt;;
+      reduce&lt;T, R&gt;(accumulator: (acc: R, value: T, index: number) =&gt; R, seed?: R): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Count the number of click events that happened in 5 seconds
+
+      import &#123; fromEvent, interval &#125;  from 'rxjs';
+      import &#123; mapTo, reduce, takeUntil &#125;  from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        takeUntil(interval(5000)),
+        mapTo(1),
+        reduce((accumulated: number, one: number) =&gt; accumulated + one, 0)
+      );
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: ... =&gt; Number of click during last 5 seconds
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

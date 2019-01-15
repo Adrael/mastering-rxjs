@@ -1,3 +1,42 @@
-<p>
-  scan works!
-</p>
+<div class="container">
+  <app-header title="scan()" category="Operators"></app-header>
+
+  <app-documentation link="https://rxjs.dev/api/index/function/scan"
+                     marble="http://reactivex.io/rxjs/img/scan.png">
+    <p>
+      <code>scan()</code> applies an accumulator function over the source Observable, and returns each intermediate
+      result, with an optional seed value.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      scan&lt;T&gt;(accumulator: (acc: T, value: T, index: number) =&gt; T, seed?: T): MonoTypeOperatorFunction&lt;T&gt;;
+      scan&lt;T&gt;(accumulator: (acc: T[], value: T, index: number) =&gt; T[], seed?: T[]): OperatorFunction&lt;T, T[]&gt;;
+      scan&lt;T, R&gt;(accumulator: (acc: R, value: T, index: number) =&gt; R, seed?: R): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; ount the number of click events
+
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; mapTo, scan &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(
+        mapTo(1),
+        scan((accumulated: number, one: number) =&gt; accumulated + one, 0)
+      )
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: 1
+      // Output: 2
+      // Output: 3
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>
