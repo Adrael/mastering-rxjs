@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="scan()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/function/scan"
-                     marble="http://reactivex.io/rxjs/img/scan.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/scan.png">
     <p>
       <code>scan()</code> applies an accumulator function over the source Observable, and returns each intermediate
       result, with an optional seed value.
@@ -39,4 +38,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/scan'],
+    ['[ReactiveX] Scan', 'http://reactivex.io/documentation/operators/scan.html'],
+    ['[Learn RxJS] scan', 'https://www.learnrxjs.io/operators/transformation/scan.html'],
+    ['[RxJS Marbles] scan', 'http://rxmarbles.com/#scan']
+  ]">
+  </app-resources>
 </div>

@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="concat()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/function/concat"
-                     marble="/assets/concat.png">
+  <app-documentation marble="/assets/concat.png">
     <p>
       <code>concat()</code> creates an output Observable which sequentially emits all values from given Observable and
       then moves on to the next.
@@ -39,4 +38,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/function/concat'],
+    ['[ReactiveX] Concat', 'http://reactivex.io/documentation/operators/concat.html'],
+    ['[Learn RxJS] concat', 'https://www.learnrxjs.io/operators/combination/concat.html'],
+    ['[RxJS Marbles] concat', 'http://rxmarbles.com/#concat']
+  ]">
+  </app-resources>
 </div>

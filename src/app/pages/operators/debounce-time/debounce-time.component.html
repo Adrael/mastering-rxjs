@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="debounceTime()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/debounceTime"
-                     marble="http://reactivex.io/rxjs/img/debounceTime.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/debounceTime.png">
     <p>
       <code>debounceTime()</code> emits a value from the source Observable only after a particular time span has passed
       without another source emission.
@@ -33,4 +32,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/debounceTime'],
+    ['[ReactiveX] Debounce', 'http://reactivex.io/documentation/operators/debounce.html'],
+    ['[Learn RxJS] debounceTime', 'https://www.learnrxjs.io/operators/filtering/debouncetime.html'],
+    ['[RxJS Marbles] debounceTime', 'http://rxmarbles.com/#debounceTime']
+  ]">
+  </app-resources>
 </div>

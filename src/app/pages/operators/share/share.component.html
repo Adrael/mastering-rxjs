@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="share()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/share"
-                     marble="http://reactivex.io/rxjs/img/share.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/share.png">
     <p>
       <code>share()</code> returns a new Observable that multi-casts (shares) the original Observable.
       As long as there is at least one Subscriber this Observable will be subscribed and emitting data.
@@ -56,4 +55,11 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/share'],
+    ['[ReactiveX] RefCount', 'http://reactivex.io/documentation/operators/refcount.html'],
+    ['[Learn RxJS] share', 'https://www.learnrxjs.io/operators/multicasting/share.html']
+  ]">
+  </app-resources>
 </div>

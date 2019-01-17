@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="distinctUntilChanged()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/distinctUntilChanged"
-                     marble="http://reactivex.io/rxjs/img/distinctUntilChanged.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/distinctUntilChanged.png">
     <p>
       <code>distinctUntilChanged()</code> returns an Observable that emits all items emitted by the source Observable
       that are distinct by comparison from the previous item.
@@ -45,4 +44,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/distinctUntilChanged'],
+    ['[ReactiveX] Distinct', 'http://reactivex.io/documentation/operators/distinct.html'],
+    ['[Learn RxJS] distinctUntilChanged', 'https://www.learnrxjs.io/operators/filtering/distinctuntilchanged.html'],
+    ['[RxJS Marbles] distinctUntilChanged', 'http://rxmarbles.com/#distinctUntilChanged']
+  ]">
+  </app-resources>
 </div>

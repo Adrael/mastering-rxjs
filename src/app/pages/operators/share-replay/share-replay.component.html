@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="shareReplay()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/shareReplay"
-                     marble="http://reactivex.io/documentation/operators/images/replay.c.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/replay.c.png">
     <p>
       <code>shareReplay()</code> shares source and replay specified number of emissions on subscription.
     </p>
@@ -40,4 +39,11 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/shareReplay'],
+    ['[ReactiveX] Replay', 'http://reactivex.io/documentation/operators/replay.html'],
+    ['[Learn RxJS] shareReplay', 'https://www.learnrxjs.io/operators/multicasting/sharereplay.html']
+  ]">
+  </app-resources>
 </div>

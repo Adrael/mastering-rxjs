@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="of()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/function/of"
-                     marble="http://reactivex.io/rxjs/img/of.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/of.png">
     <p>
       <code>of()</code> converts the arguments to an observable sequence.
     </p>
@@ -32,4 +31,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/function/of'],
+    ['[ReactiveX] From', 'http://reactivex.io/documentation/operators/from.html'],
+    ['[Learn RxJS] of', 'https://www.learnrxjs.io/operators/creation/of.html'],
+    ['[RxJS Marbles] of', 'http://rxmarbles.com/#of']
+  ]">
+  </app-resources>
 </div>

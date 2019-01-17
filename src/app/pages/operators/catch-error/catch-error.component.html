@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="catchError()" category="Operators" subtitle="Formerly known as <code>catch()</code>"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/catchError"
-                     marble="http://reactivex.io/documentation/operators/images/catch.js.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/catch.js.png">
     <p>
       Gracefully handle errors in an observable sequence.
     </p>
@@ -54,4 +53,11 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/catchError'],
+    ['[ReactiveX] Catch', 'http://reactivex.io/documentation/operators/catch.html'],
+    ['[Learn RxJS] catch / catchError', 'https://www.learnrxjs.io/operators/error_handling/catch.html']
+  ]">
+  </app-resources>
 </div>

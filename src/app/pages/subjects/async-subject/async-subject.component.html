@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="AsyncSubject" category="Subjects"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/class/AsyncSubject"
-                     marble="http://reactivex.io/documentation/operators/images/S.AsyncSubject.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/S.AsyncSubject.png">
     <p>
       An <code>AsyncSubject</code> emits the last value (and only the last value) emitted by the source Observable,
       and only after that source Observable completes.
@@ -33,4 +32,10 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/class/AsyncSubject'],
+    ['[ReactiveX] Subject', 'http://reactivex.io/documentation/subject.html']
+  ]">
+  </app-resources>
 </div>

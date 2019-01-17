@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="forkJoin()" category="Operators" subtitle="Formerly known as <code>zip()</code>"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/function/forkJoin"
-                     marble="/assets/forkJoin.png">
+  <app-documentation marble="/assets/forkJoin.png">
     <p>
       <code>forkJoin()</code> combines the emissions of multiple Observables together via a specified function and emit
       single items for each combination based on the results of this function.
@@ -40,4 +39,11 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/function/forkJoin'],
+    ['[ReactiveX] Zip', 'http://reactivex.io/documentation/operators/zip.html'],
+    ['[Learn RxJS] forkJoin', 'https://www.learnrxjs.io/operators/combination/forkjoin.html']
+  ]">
+  </app-resources>
 </div>

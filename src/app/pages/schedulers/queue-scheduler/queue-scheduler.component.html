@@ -1,7 +1,7 @@
 <div class="container">
   <app-header title="queue" subtitle="aliased as <code>queueScheduler</code>" category="Schedulers"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+  <app-documentation>
     <p>
       The <code>queue</code> scheduler, when used with delay, behaves the same as
       <code routerLink="/schedulers/async">async</code> scheduler. When used without delay, it schedules given task
@@ -46,4 +46,10 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/const/queueScheduler'],
+    ['[ReactiveX] Scheduler', 'http://reactivex.io/documentation/scheduler.html']
+  ]">
+  </app-resources>
 </div>

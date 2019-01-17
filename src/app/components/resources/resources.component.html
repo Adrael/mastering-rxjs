@@ -1,0 +1,11 @@
+<div class="card bg-light mb-4">
+  <div class="card-header">
+    &para; Resources
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let resource of resources">
+      <a [textContent]="resource[0]" [href]="resource[1]" target="_blank" rel="noreferrer"></a>
+    </li>
+  </ul>
+</div>

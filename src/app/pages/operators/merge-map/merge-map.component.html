@@ -41,4 +41,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/mergeMap'],
+    ['[ReactiveX] FlatMap', 'http://reactivex.io/documentation/operators/flatmap.html'],
+    ['[Learn RxJS] mergeMap', 'https://www.learnrxjs.io/operators/transformation/mergemap.html'],
+    ['[RxJS Marbles] mergeMap', 'http://rxmarbles.com/#mergeMap']
+  ]">
+  </app-resources>
 </div>

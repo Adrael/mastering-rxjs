@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="reduce()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/reduce"
-                     marble="http://reactivex.io/rxjs/img/reduce.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/reduce.png">
     <p>
       <code>reduce()</code> applies an accumulator function over the source Observable, and returns the accumulated
       result when the source completes, given an optional seed value.
@@ -37,4 +36,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/reduce'],
+    ['[ReactiveX] Reduce', 'http://reactivex.io/documentation/operators/reduce.html'],
+    ['[Learn RxJS] reduce', 'https://www.learnrxjs.io/operators/transformation/reduce.html'],
+    ['[RxJS Marbles] reduce', 'http://rxmarbles.com/#reduce']
+  ]">
+  </app-resources>
 </div>

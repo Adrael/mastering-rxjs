@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="ReplaySubject" category="Subjects"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/class/ReplaySubject"
-                     marble="http://reactivex.io/documentation/operators/images/S.ReplaySubject.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/S.ReplaySubject.png">
     <p>
       The <code>ReplaySubject</code> "replays" or emits old values to new subscribers.
       It buffers a set number of values and will emit those values immediately to any new subscribers in addition to
@@ -42,4 +41,10 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/class/ReplaySubject'],
+    ['[ReactiveX] Subject', 'http://reactivex.io/documentation/subject.html']
+  ]">
+  </app-resources>
 </div>

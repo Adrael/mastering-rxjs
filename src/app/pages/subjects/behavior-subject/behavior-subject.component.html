@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="BehaviorSubject" category="Subjects"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/class/BehaviorSubject"
-                     marble="http://reactivex.io/documentation/operators/images/S.BehaviorSubject.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/S.BehaviorSubject.png">
     <p>
       A <code>BehaviorSubject</code> requires an initial value and emits its current value whenever it is subscribed to.
     </p>
@@ -34,4 +33,10 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/class/BehaviorSubject'],
+    ['[ReactiveX] Subject', 'http://reactivex.io/documentation/subject.html']
+  ]">
+  </app-resources>
 </div>

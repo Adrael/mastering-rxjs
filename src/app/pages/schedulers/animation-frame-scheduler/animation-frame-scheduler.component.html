@@ -1,7 +1,7 @@
 <div class="container">
   <app-header title="animationFrame" subtitle="aliased as <code>animationFrameScheduler</code>" category="Schedulers"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+  <app-documentation>
     <p>
       When <code>animationFrame</code> scheduler is used with delay, it will fall back to
       <code routerLink="/schedulers/async">async</code> scheduler behaviour.
@@ -48,4 +48,10 @@
       <div class="mx-auto example-div" style="background-color: red; width: 50px; border: 1px solid;"></div>
     </div>
   </app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/const/animationFrameScheduler'],
+    ['[ReactiveX] Scheduler', 'http://reactivex.io/documentation/scheduler.html']
+  ]">
+  </app-resources>
 </div>

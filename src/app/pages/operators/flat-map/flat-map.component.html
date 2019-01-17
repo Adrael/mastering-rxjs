@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="flatMap()" category="Operators" subtitle="Also known as <code>mergeMap()</code>"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/flatMap"
-                     marble="http://reactivex.io/documentation/operators/images/flatMap.c.png">
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/flatMap.c.png">
     <p>
       <code>flatMap()</code> projects each source value to an Observable which is merged in the output Observable.
     </p>
@@ -41,4 +40,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/flatMap'],
+    ['[ReactiveX] FlatMap', 'http://reactivex.io/documentation/operators/flatmap.html'],
+    ['[Learn RxJS] mergeMap', 'https://www.learnrxjs.io/operators/transformation/mergemap.html'],
+    ['[RxJS Marbles] mergeMap', 'http://rxmarbles.com/#mergeMap']
+  ]">
+  </app-resources>
 </div>

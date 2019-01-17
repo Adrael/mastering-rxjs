@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="first()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/first"
-                     marble="http://reactivex.io/rxjs/img/first.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/first.png">
     <p>
       <code>first()</code> emits only the first value (or the first value that meets some condition) emitted by the
       source Observable.
@@ -35,4 +34,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/first'],
+    ['[ReactiveX] First', 'http://reactivex.io/documentation/operators/first.html'],
+    ['[Learn RxJS] first', 'https://www.learnrxjs.io/operators/filtering/first.html'],
+    ['[RxJS Marbles] first', 'http://rxmarbles.com/#first']
+  ]">
+  </app-resources>
 </div>

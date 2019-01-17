@@ -1,7 +1,7 @@
 <div class="container">
   <app-header title="asap" subtitle="aliased as <code>asapScheduler</code>" category="Schedulers"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+  <app-documentation>
     <p>
       The <code>asap</code> scheduler behaves the same as the <code routerLink="/schedulers/async">async</code> scheduler
       when you use it to delay task in time. If however you set delay to 0, <code>asap</code> will wait for current
@@ -37,4 +37,10 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/const/asapScheduler'],
+    ['[ReactiveX] Scheduler', 'http://reactivex.io/documentation/scheduler.html']
+  ]">
+  </app-resources>
 </div>

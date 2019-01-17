@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="from()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/from"
-                     marble="http://reactivex.io/rxjs/img/from.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/from.png">
     <p>
       <code>from()</code> creates an Observable from an Array, an array-like object, a Promise, an iterable object,
       or an Observable-like object.
@@ -32,4 +31,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/function/from'],
+    ['[ReactiveX] From', 'http://reactivex.io/documentation/operators/from.html'],
+    ['[Learn RxJS] from', 'https://www.learnrxjs.io/operators/creation/from.html'],
+    ['[RxJS Marbles] from', 'http://rxmarbles.com/#from']
+  ]">
+  </app-resources>
 </div>

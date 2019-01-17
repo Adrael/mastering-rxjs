@@ -33,4 +33,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/map'],
+    ['[ReactiveX] Map', 'http://reactivex.io/documentation/operators/map.html'],
+    ['[Learn RxJS] map', 'https://www.learnrxjs.io/operators/transformation/map.html'],
+    ['[RxJS Marbles] map', 'http://rxmarbles.com/#map']
+  ]">
+  </app-resources>
 </div>

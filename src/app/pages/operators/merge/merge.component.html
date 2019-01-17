@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="merge()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/function/merge"
-                     marble="http://reactivex.io/rxjs/img/merge.png">
+  <app-documentation marble="http://reactivex.io/rxjs/img/merge.png">
     <p>
       <code>merge()</code> creates an output Observable which concurrently emits all values from every given input
       Observable.
@@ -37,4 +36,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/function/merge'],
+    ['[ReactiveX] Merge', 'http://reactivex.io/documentation/operators/merge.html'],
+    ['[Learn RxJS] merge', 'https://www.learnrxjs.io/operators/combination/merge.html'],
+    ['[RxJS Marbles] merge', 'http://rxmarbles.com/#merge']
+  ]">
+  </app-resources>
 </div>

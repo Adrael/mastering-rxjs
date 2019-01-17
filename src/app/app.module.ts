@@ -11,6 +11,7 @@ import { ExampleCodeComponent } from './components/example-code/example-code.com
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ResourcesComponent } from './components/resources/resources.component';
 import { SignatureComponent } from './components/signature/signature.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BufferTimeComponent } from './pages/operators/buffer-time/buffer-time.component';
@@ -67,6 +68,7 @@ import { EmptyComponent } from './pages/empty/empty.component';
     ForkJoinComponent,
     BasePageComponent,
     ResultsComponent,
+    ResourcesComponent,
     HeaderComponent,
     DocumentationComponent,
     ExampleCodeComponent,

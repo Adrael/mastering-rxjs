@@ -1,8 +1,7 @@
 <div class="container">
   <app-header title="concatMap()" category="Operators"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/operators/concatMap"
-                     marble="https://tolikcode.github.io/images/concatMap.png">
+  <app-documentation marble="https://tolikcode.github.io/images/concatMap.png">
     <p>
       <code>concatMap()</code> projects each source value to an Observable which is merged in the output Observable,
       in a serialized fashion waiting for each one to complete before merging the next.
@@ -37,4 +36,12 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/concatMap'],
+    ['[ReactiveX] FlatMap', 'http://reactivex.io/documentation/operators/flatmap.html'],
+    ['[Learn RxJS] concatMap', 'https://www.learnrxjs.io/operators/transformation/concatmap.html'],
+    ['[RxJS Marbles] concatMap', 'http://rxmarbles.com/#concatMap']
+  ]">
+  </app-resources>
 </div>

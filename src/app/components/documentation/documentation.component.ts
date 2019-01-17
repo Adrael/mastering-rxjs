@@ -6,6 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: [ './documentation.component.scss' ]
 })
 export class DocumentationComponent {
-  @Input() public link: string;
   @Input() public marble: string;
 }

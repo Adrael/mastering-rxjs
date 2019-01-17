@@ -1,7 +1,7 @@
 <div class="container">
   <app-header title="async" subtitle="aliased as <code>asyncScheduler</code>" category="Schedulers"></app-header>
 
-  <app-documentation link="https://rxjs.dev/api/index/const/asapScheduler">
+  <app-documentation>
     <p>
       The <code>async</code> scheduler schedules tasks asynchronously, by putting them on the JavaScript event loop queue.
       It is best used to delay tasks in time or to schedule tasks repeating in intervals.
@@ -38,5 +38,11 @@
   </app-example-code>
 
   <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/index/const/asyncScheduler'],
+    ['[ReactiveX] Scheduler', 'http://reactivex.io/documentation/scheduler.html']
+  ]">
+  </app-resources>
 </div>
 
