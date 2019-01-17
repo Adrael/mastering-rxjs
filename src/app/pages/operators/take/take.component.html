@@ -1,3 +1,44 @@
-<p>
-  take works!
-</p>
+<div class="container">
+  <app-header title="take()" category="Operators"></app-header>
+
+  <app-documentation marble="/assets/take.png">
+    <p>
+      <code>take()</code> emits only the first count values emitted by the source Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      take&lt;T&gt;(count: number): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Take the first 5 seconds of an infinite 1-second interval Observable
+
+      import &#123; interval &#125; from 'rxjs';
+      import &#123; take &#125; from 'rxjs/operators';
+
+      interval(1000)
+      .pipe(take(5))
+      .subscribe((item: number) =&gt; console.log(item));
+
+      // Output: 0
+      // Output: 1
+      // Output: 2
+      // Output: 3
+      // Output: 4
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/take'],
+    ['[ReactiveX] Take', 'http://reactivex.io/documentation/operators/take.html'],
+    ['[Learn RxJS] take', 'https://www.learnrxjs.io/operators/filtering/take.html'],
+    ['[RxJS Marbles] take', 'http://rxmarbles.com/#take']
+  ]">
+  </app-resources>
+</div>

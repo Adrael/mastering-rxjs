@@ -1,3 +1,52 @@
-<p>
-  take-until works!
-</p>
+<div class="container">
+  <app-header title="takeUntil()" category="Operators"></app-header>
+
+  <app-documentation marble="/assets/takeUntil.png">
+    <p>
+      <code>takeUntil()</code> emits the values emitted by the source Observable until a notifier Observable emits a
+      value.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      takeUntil&lt;T&gt;(notifier: Observable&lt;any&gt;): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Tick every second until the first click on a DIV happens
+
+      import &#123; fromEvent, interval &#125; from 'rxjs';
+      import &#123; takeUntil &#125; from 'rxjs/operators';
+
+      const divClick$ = fromEvent(document, 'click')
+      .pipe(
+        filter((event: MouseEvent) => (&lt;HTMLElement&gt;event.target).tagName === 'DIV')
+      );
+
+      interval(1000)
+      .pipe(
+        takeUntil(divClick$)
+      )
+      .subscribe((item: number) =&gt; console.log(item));
+
+      // Output: 0
+      // Output: 1
+      // Output: 2
+      // Output: ...
+      // Output: 4 =&gt; Click
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/takeUntil'],
+    ['[ReactiveX] TakeUntil', 'http://reactivex.io/documentation/operators/takeuntil.html'],
+    ['[Learn RxJS] takeUntil', 'https://www.learnrxjs.io/operators/filtering/takeuntil.html'],
+    ['[RxJS Marbles] takeUntil', 'http://rxmarbles.com/#takeUntil']
+  ]">
+  </app-resources>
+</div>

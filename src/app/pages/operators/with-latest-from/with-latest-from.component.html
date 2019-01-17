@@ -1,3 +1,51 @@
-<p>
-  with-latest-from works!
-</p>
+<div class="container">
+  <app-header title="withLatestFrom()" category="Operators" subtitle="Related to <code>combineLatest()</code>"></app-header>
+
+  <app-documentation marble="/assets/withLatestFrom.png">
+    <p>
+      <code>withLatestFrom()</code> combines the source Observable with other Observables to create an Observable whose
+      values are calculated from the latest values of each, only when the source emits.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      withLatestFrom&lt;T, R&gt;(project: (v1: T) =&gt; R): OperatorFunction&lt;T, R&gt;;
+      withLatestFrom&lt;T, T2, R&gt;(v2: ObservableInput&lt;T2&gt;, project: (v1: T, v2: T2) =&gt; R): OperatorFunction&lt;T, R&gt;;
+      withLatestFrom&lt;T, R&gt;(...observables: Array&lt;ObservableInput&lt;any&gt; | ((...values: Array&lt;any&gt;) =&gt; R)&gt;): OperatorFunction&lt;T, R&gt;;
+      withLatestFrom&lt;T, R&gt;(array: ObservableInput&lt;any&gt;[]): OperatorFunction&lt;T, R&gt;;
+      withLatestFrom&lt;T, R&gt;(array: ObservableInput&lt;any&gt;[], project: (...values: Array&lt;any&gt;) =&gt; R): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; On every click event, emit an array with the latest timer event plus the click event
+
+      import &#123; fromEvent, interval &#125; from 'rxjs';
+      import &#123; withLatestFrom &#125; from 'rxjs/operators';
+
+      const timer$ = interval(1000);
+
+      fromEvent(document, 'click')
+      .pipe(
+        withLatestFrom(timer$)
+      )
+      .subscribe((item: number) =&gt; console.log(item));
+
+      // Output: [ MouseEvent &#123; ... &#125;, 4] =&gt; Click
+      // Output: [ MouseEvent &#123; ... &#125;, 10] =&gt; Click
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/withLatestFrom'],
+    ['[ReactiveX] CombineLatest', 'http://reactivex.io/documentation/operators/combinelatest.html'],
+    ['[Learn RxJS] withLatestFrom', 'https://www.learnrxjs.io/operators/combination/withlatestfrom.html'],
+    ['[RxJS Marbles] withLatestFrom', 'http://rxmarbles.com/#withLatestFrom']
+  ]">
+  </app-resources>
+</div>

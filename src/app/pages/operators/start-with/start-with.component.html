@@ -1,3 +1,45 @@
-<p>
-  start-with works!
-</p>
+<div class="container">
+  <app-header title="startWith()" category="Operators"></app-header>
+
+  <app-documentation marble="/assets/startWith.png">
+    <p>
+      <code>startWith()</code> returns an Observable that emits the items you specify as arguments before it begins to
+      emit items emitted by the source Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      startWith&lt;T&gt;(scheduler?: SchedulerLike): MonoTypeOperatorFunction&lt;T&gt;;
+      startWith&lt;T, D = T, ...&gt;(v1: D, ..., scheduler?: SchedulerLike): OperatorFunction&lt;T, T | D | ...&gt;;
+      startWith&lt;T, D = T&gt;(...array: Array&lt;D | SchedulerLike&gt;): OperatorFunction&lt;T, T | D&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Start the chain of emissions with "first", "second"
+
+      import &#123; of &#125; from 'rxjs';
+      import &#123; startWith &#125; from 'rxjs/operators';
+
+      of("from source")
+      .pipe(startWith("first", "second"))
+      .subscribe((item: string) =&gt; console.log(item));
+
+      // Output: "first"
+      // Output: "second"
+      // Output: "from source"
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/startWith'],
+    ['[ReactiveX] StartWith', 'http://reactivex.io/documentation/operators/startwith.html'],
+    ['[Learn RxJS] startWith', 'https://www.learnrxjs.io/operators/combination/startwith.html'],
+    ['[RxJS Marbles] startWith', 'http://rxmarbles.com/#startWith']
+  ]">
+  </app-resources>
+</div>

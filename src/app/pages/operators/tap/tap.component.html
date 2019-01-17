@@ -1,3 +1,46 @@
-<p>
-  tap works!
-</p>
+<div class="container">
+  <app-header title="tap()" category="Operators" subtitle="Formerly known as <code>do()</code>"></app-header>
+
+  <app-documentation marble="http://reactivex.io/documentation/operators/images/do.c.png">
+    <p>
+      <code>tap()</code> perform a side effect for every emission on the source Observable, but return an Observable
+      that is identical to the source.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      tap&lt;T&gt;(next?: (x: T) =&gt; void, error?: (e: any) =&gt; void, complete?: () =&gt; void): MonoTypeOperatorFunction&lt;T&gt;;
+      tap&lt;T&gt;(observer: PartialObserver&lt;T&gt;): MonoTypeOperatorFunction&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Map every click to the clientX position of that click, while also logging the click event
+
+      import &#123; fromEvent &#125; from 'rxjs';
+      import &#123; map, tap &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click');
+      .pipe(
+        tap((event: MouseEvent) => console.log(event)),
+        map((event: MouseEvent) => event.clientX)
+      )
+      .subscribe((item: number) =&gt; console.log(item));
+
+      // Output: 1412
+      // Output: 928
+      // Output: ...
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/tap'],
+    ['[ReactiveX] Do', 'http://reactivex.io/documentation/operators/do.html'],
+    ['[Learn RxJS] do / tap', 'https://www.learnrxjs.io/operators/utility/do.html']
+  ]">
+  </app-resources>
+</div>

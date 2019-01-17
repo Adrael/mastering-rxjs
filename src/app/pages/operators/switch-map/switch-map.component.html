@@ -1,3 +1,44 @@
-<p>
-  switch-map works!
-</p>
+<div class="container">
+  <app-header title="switchMap()" category="Operators" subtitle="Related to <code>flatMap()</code>"></app-header>
+
+  <app-documentation marble="/assets/switchMap.png">
+    <p>
+      <code>switchMap()</code> projects each source value to an Observable which is merged in the output Observable,
+      emitting values only from the most recently projected Observable.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      switchMap&lt;T, R&gt;(project: (value: T, index: number) =&gt; ObservableInput&lt;R&gt;): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Rerun an interval Observable on every click event
+
+      import &#123; fromEvent, interval &#125; from 'rxjs';
+      import &#123; switchMap &#125; from 'rxjs/operators';
+
+      fromEvent(document, 'click')
+      .pipe(switchMap((event: MouseEvent) =&gt; interval(1000)))
+      .subscribe((item: number) =&gt; console.log(item));
+
+      // Output: 0
+      // Output: 1
+      // Output: ...
+      // Output: 0  =&gt; Click
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/switchMap'],
+    ['[ReactiveX] FlatMap', 'http://reactivex.io/documentation/operators/flatmap.html'],
+    ['[Learn RxJS] switchMap', 'https://www.learnrxjs.io/operators/transformation/switchmap.html'],
+    ['[RxJS Marbles] switchMap', 'http://rxmarbles.com/#switchMap']
+  ]">
+  </app-resources>
+</div>

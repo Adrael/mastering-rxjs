@@ -41,7 +41,11 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
     this.ongoingSubscriptions = null;
   }
 
-  protected plug(observableLike: ObservableLike<any> | Subscription, name?: string, consoleOnly?: boolean): void {
+  protected plug(
+    observableLike: ObservableLike<any> | Subscription,
+    name?: string,
+    consoleOnly: boolean = false,
+    ignore: boolean = false): void {
     if (observableLike instanceof Subscription) {
       this.ongoingSubscriptions.add(observableLike);
       return;
@@ -51,6 +55,10 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
       .pipe(takeUntil(this.takeUntilStopped$))
       .subscribe(
         (data: any) => {
+          if (ignore) {
+            return;
+          }
+
           if (name) {
             console.log(`${name}:`, data);
             this.results.push(`${name}: ${data}`);
@@ -66,11 +74,20 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
           console.log('Received data:', data);
         },
         (error: any) => {
+          if (ignore) {
+            return;
+          }
+
           console.error(`Received error${name ? ` for ${name}` : ''}:`, error);
         },
         () => {
-          console.warn(`Observable${name ? ` ${name}` : ''} has completed!`);
           this.stop();
+
+          if (ignore) {
+            return;
+          }
+
+          console.warn(`Observable${name ? ` ${name}` : ''} has completed!`);
         });
   }
 }
