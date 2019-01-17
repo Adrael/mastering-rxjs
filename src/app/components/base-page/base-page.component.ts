@@ -57,19 +57,19 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
             return;
           }
 
-          if (!consoleOnly) {
-            this.results.push(data);
-          } else {
+          if (consoleOnly) {
             this.results.push(`Open your browser's DevTools to see the results`);
+          } else {
+            this.results.push(data);
           }
 
           console.log('Received data:', data);
         },
         (error: any) => {
-          console.error('Received error:', error);
+          console.error(`Received error${name ? ` for ${name}` : ''}:`, error);
         },
         () => {
-          console.warn('Observable has completed!');
+          console.warn(`Observable${name ? ` ${name}` : ''} has completed!`);
           this.stop();
         });
   }

@@ -10,12 +10,21 @@
   <div class="row mb-4">
     <div class="col px-0"></div>
     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRNFU3s4g6gKOm9gn_TwLNShjcWDfIiBps4tXOQd3kfhp22-mIV3c_W0r55QrlYKGFlbVF9KDwtO5f7/embed?start=false&loop=false&delayms=3000"
+            [class.full-screen]="isSlideFullScreen"
             frameborder="0"
-            width="960"
-            height="569"
+            [width]="width"
+            [height]="height"
             allowfullscreen="true"
             mozallowfullscreen="true"
             webkitallowfullscreen="true"></iframe>
     <div class="col px-0"></div>
   </div>
+
+  <button class="btn btn-sm full-screen-button"
+          (click)="toggleFullScreenSlide()"
+          [ngSwitch]="isSlideFullScreen"
+          [ngClass]="{ 'active btn-danger': isSlideFullScreen, 'btn-success': !isSlideFullScreen }">
+    <ng-container *ngSwitchCase="true">&times;</ng-container>
+    <ng-container *ngSwitchCase="false">Present in full-screen</ng-container>
+  </button>
 </div>

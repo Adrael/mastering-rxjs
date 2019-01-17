@@ -6,4 +6,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public width = 960;
+  public height = 569;
+  public isSlideFullScreen = false;
+
+  public toggleFullScreenSlide(): void {
+    this.isSlideFullScreen = !this.isSlideFullScreen;
+  }
 }
