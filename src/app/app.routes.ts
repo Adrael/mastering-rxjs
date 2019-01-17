@@ -61,6 +61,11 @@ export const APP_ROUTES: Array<Route> = [
         path: '',
         pathMatch: 'full',
         redirectTo: '/subjects/async'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/subjects/async'
       }
     ]
   },
@@ -86,7 +91,12 @@ export const APP_ROUTES: Array<Route> = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/schedulers/async'
+        redirectTo: '/schedulers/animationFrame'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/schedulers/animationFrame'
       }
     ]
   },
@@ -104,7 +114,12 @@ export const APP_ROUTES: Array<Route> = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/testing/virtualTime'
+        redirectTo: '/testing/test'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/testing/test'
       }
     ]
   },
@@ -221,6 +236,11 @@ export const APP_ROUTES: Array<Route> = [
       },
       {
         path: '',
+        pathMatch: 'full',
+        redirectTo: '/operators/bufferTime'
+      },
+      {
+        path: '**',
         pathMatch: 'full',
         redirectTo: '/operators/bufferTime'
       }

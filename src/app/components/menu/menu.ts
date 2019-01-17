@@ -63,6 +63,14 @@ export const menuCategories: Array<IMenuCategory> = [
       {
         name: 'VirtualTimeScheduler',
         link: 'virtualTime'
+      },
+      {
+        name: 'fakeAsync / tick',
+        link: 'fakeAsyncTick'
+      },
+      {
+        name: 'Marble',
+        link: 'marble'
       }
     ]
   },
@@ -180,5 +188,20 @@ export const menuCategories: Array<IMenuCategory> = [
         link: 'withLatestFrom'
       }
     ]
-  }
+  },
+
+  {
+    name: 'Custom operators',
+    link: '/operators/custom/',
+    items: [
+      {
+        name: 'firstOrUntil',
+        link: 'firstOrUntil'
+      },
+      {
+        name: 'takeOrUntil',
+        link: 'takeOrUntil'
+      }
+    ]
+  },
 ];
