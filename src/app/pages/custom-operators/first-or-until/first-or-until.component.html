@@ -1,0 +1,59 @@
+<div class="container">
+  <app-header title="firstOrUntil()" category="Custom Operators"
+              subtitle="Subtle composition of <code>first()</code> and <code>takeUntil()</code> operators"></app-header>
+
+  <app-documentation>
+    <p>
+      <code>firstOrUntil()</code> will complete as soon as source Observable or notifier Observable emit a value.
+      Useful to prevent memory leaks.
+    </p>
+
+    <p class="mb-0">
+      <small>
+        For further details about an in-depth look under-the-hood, see also:
+        <code routerLink="/operators/first">first</code>,
+        <code routerLink="/operators/takeUntil">takeUntil</code>
+      </small>
+    </p>
+  </app-documentation>
+
+  <app-signature title="Source code">
+    <pre class="my-0"><code class="language-ts">
+      import &#123; Observable, OperatorFunction &#125; from 'rxjs';
+      import &#123; first, takeUntil &#125; from 'rxjs/operators';
+
+      export function firstOrUntil&lt;T, D&gt;(notifier: Observable&lt;any&gt;,
+                                         predicate?: ((value: T, index: number, source: Observable&lt;T&gt;) =&gt; boolean) | null,
+                                         defaultValue?: D): OperatorFunction&lt;T, T | D&gt; &#123;
+        return (source: Observable&lt;T&gt;) =&gt; source.pipe(first(predicate, defaultValue), takeUntil(notifier));
+      &#125;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Completes after 5 seconds if source has not emitted
+
+      import &#123; timer &#125; from 'rxjs';
+      import &#123; map &#125; from 'rxjs/operators';
+      import &#123; firstOrUntil &#125; from '../../../operators/first-or-until/first-or-until.operator';
+
+      const randomTime = Math.ceil(Math.random() * 10000);
+      console.log(`Random timer will wait for $&#123;randomTime&#125;ms before completing.`);
+      console.log(`Fixed timer will wait for 5000ms before completing.`);
+      console.log(`$&#123;randomTime &gt; 5000 ? 'Fixed' : 'Random'&#125; timer should complete first.`);
+  
+      const randomTimer = timer(randomTime)
+        .pipe(map(() =&gt; 'Random timer has completed!'));
+  
+      const fixedTimer = timer(5000)
+        .pipe(map(() =&gt; 'Fixed timer has completed!'));
+  
+      randomTimer
+        .pipe(firstOrUntil(fixedTimer))
+        .subscribe((timer: string) =&gt; console.log(timer));
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

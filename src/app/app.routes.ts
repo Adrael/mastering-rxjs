@@ -1,4 +1,6 @@
 import { Route } from '@angular/router';
+import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/first-or-until.component';
+import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
 import { EmptyComponent } from './pages/empty/empty.component';
 import { BufferTimeComponent } from './pages/operators/buffer-time/buffer-time.component';
 import { CatchErrorComponent } from './pages/operators/catch-error/catch-error.component';
@@ -120,6 +122,29 @@ export const APP_ROUTES: Array<Route> = [
         path: '**',
         pathMatch: 'full',
         redirectTo: '/testing/test'
+      }
+    ]
+  },
+  {
+    path: 'operators/custom',
+    children: [
+      {
+        path: 'firstOrUntil',
+        component: FirstOrUntilComponent
+      },
+      {
+        path: 'takeOrUntil',
+        component: TakeOrUntilComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/operators/custom/firstOrUntil'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/operators/custom/firstOrUntil'
       }
     ]
   },

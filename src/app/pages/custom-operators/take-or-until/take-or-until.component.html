@@ -1,0 +1,45 @@
+<div class="container">
+  <app-header title="takeOrUntil()" category="Custom Operators"
+              subtitle="Subtle composition of <code>take()</code> and <code>takeUntil()</code> operators"></app-header>
+
+  <app-documentation>
+    <p>
+      <code>takeOrUntil()</code> will complete when source Observable has emitted a given number of time, or when
+      notifier Observable emits a value. Useful to prevent memory leaks.
+    </p>
+
+    <p class="mb-0">
+      <small>
+        For further details about an in-depth look under-the-hood, see also:
+        <code routerLink="/operators/take">take</code>,
+        <code routerLink="/operators/takeUntil">takeUntil</code>
+      </small>
+    </p>
+  </app-documentation>
+
+  <app-signature title="Source code">
+    <pre class="my-0"><code class="language-ts">
+      import &#123; MonoTypeOperatorFunction, Observable &#125; from 'rxjs';
+      import &#123; take, takeUntil &#125; from 'rxjs/operators';
+      
+      export function takeOrUntil&lt;T&gt;(count: number, notifier: Observable&lt;any&gt;): MonoTypeOperatorFunction&lt;T&gt; &#123;
+        return (source: Observable&lt;T&gt;) =&gt; source.pipe(take(count), takeUntil(notifier));
+      &#125;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Completes after 2 clicks or 5 seconds
+
+      import &#123; fromEvent, timer &#125; from 'rxjs';
+      import &#123; takeOrUntil &#125; from '../../../operators/take-or-until/take-or-until.operator';
+
+      fromEvent(document, 'click')
+        .pipe(takeOrUntil(2, timer(5000)))
+        .subscribe((event: MouseEvent) =&gt; console.log(value));
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+</div>

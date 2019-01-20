@@ -41,6 +41,11 @@ export class BasePageComponent implements IPageComponent, AfterViewInit, OnDestr
     this.ongoingSubscriptions = null;
   }
 
+  public log(message: any): void {
+    this.results.push(message);
+    console.log('Received data:', message);
+  }
+
   protected plug(
     observableLike: ObservableLike<any> | Subscription,
     name?: string,

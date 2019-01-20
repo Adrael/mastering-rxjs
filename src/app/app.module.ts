@@ -51,6 +51,8 @@ import { AsyncSubjectComponent } from './pages/subjects/async-subject/async-subj
 import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/behavior-subject.component';
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
 import { EmptyComponent } from './pages/empty/empty.component';
+import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/first-or-until.component';
+import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +102,9 @@ import { EmptyComponent } from './pages/empty/empty.component';
     FlatMapComponent,
     SignatureComponent,
     HomeComponent,
-    EmptyComponent
+    EmptyComponent,
+    FirstOrUntilComponent,
+    TakeOrUntilComponent
   ],
   imports: [
     FormsModule,
