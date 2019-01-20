@@ -1,6 +1,8 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search documentation"
-         [ngModel]="filterValue" (ngModelChange)="filterMenuItems($event)">
+         #filterInput [ngModel]="filterValue" (ngModelChange)="filterMenuItems($event)">
+
+  <span class="clear" (click)="resetFilter()" *ngIf="filterValue">&times;</span>
 
   <div class="sidebar-sticky" [ngSwitch]="menu.length">
     <ng-container *ngSwitchCase="0">

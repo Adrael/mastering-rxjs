@@ -1,20 +1,24 @@
-import {AfterViewChecked, Component, ElementRef, QueryList, ViewChildren} from '@angular/core';
-import {IMenuCategory, IMenuItem, menuCategories} from './menu';
-import isString from 'lodash-es/isString';
-import isNil from 'lodash-es/isNil';
+import { AfterViewChecked, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import cloneDeep from 'lodash-es/cloneDeep';
+import isNil from 'lodash-es/isNil';
+import isString from 'lodash-es/isString';
+import { IMenuCategory, IMenuItem, menuCategories } from './menu';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: [ './menu.component.scss' ]
 })
 export class MenuComponent implements AfterViewChecked {
   public menu: Array<IMenuCategory> = cloneDeep(menuCategories);
   public filterValue: string;
 
-  @ViewChildren('menuItem', {read: ElementRef})
+  @ViewChild('filterInput', { read: ElementRef })
+  private readonly filterInput: ElementRef;
+
+  @ViewChildren('menuItem', { read: ElementRef })
   private readonly menuItems: QueryList<ElementRef>;
+
   private hasMenuItemBeenFound = false;
 
   public ngAfterViewChecked(): void {
@@ -30,8 +34,15 @@ export class MenuComponent implements AfterViewChecked {
     }
   }
 
+  public resetFilter(): void {
+    this.filterValue = null;
+    this.filterMenuItems(null);
+    this.filterInput.nativeElement.focus();
+  }
+
   public filterMenuItems(filter: string): void {
     this.menu = cloneDeep(menuCategories);
+    this.filterValue = filter;
 
     if (isString(filter) && filter.trim().length > 0) {
       this.menu = this.menu.filter((category: IMenuCategory) => {

@@ -53,6 +53,8 @@ import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-s
 import { EmptyComponent } from './pages/empty/empty.component';
 import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/first-or-until.component';
 import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -111,7 +113,8 @@ import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/tak
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES, {
       scrollPositionRestoration: 'top'
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [ AppComponent ]
