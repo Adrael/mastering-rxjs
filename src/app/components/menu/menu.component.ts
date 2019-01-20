@@ -1,7 +1,9 @@
-import { AfterViewChecked, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import cloneDeep from 'lodash-es/cloneDeep';
 import isNil from 'lodash-es/isNil';
 import isString from 'lodash-es/isString';
+import { take } from 'rxjs/operators';
 import { IMenuCategory, IMenuItem, menuCategories } from './menu';
 
 @Component({
@@ -9,7 +11,7 @@ import { IMenuCategory, IMenuItem, menuCategories } from './menu';
   templateUrl: './menu.component.html',
   styleUrls: [ './menu.component.scss' ]
 })
-export class MenuComponent implements AfterViewChecked {
+export class MenuComponent implements OnInit, AfterViewChecked {
   public menu: Array<IMenuCategory> = cloneDeep(menuCategories);
   public filterValue: string;
 
@@ -19,7 +21,21 @@ export class MenuComponent implements AfterViewChecked {
   @ViewChildren('menuItem', { read: ElementRef })
   private readonly menuItems: QueryList<ElementRef>;
 
+  private readonly filterKey = 'filter';
+
   private hasMenuItemBeenFound = false;
+
+  constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute) {}
+
+  public ngOnInit(): void {
+    this.activatedRoute
+      .queryParamMap
+      .subscribe((paramMap: ParamMap) => {
+        if (paramMap.has(this.filterKey)) {
+          this.filterMenuItems(paramMap.get(this.filterKey));
+        }
+      });
+  }
 
   public ngAfterViewChecked(): void {
     if (this.hasMenuItemBeenFound) {
@@ -40,7 +56,21 @@ export class MenuComponent implements AfterViewChecked {
     this.filterInput.nativeElement.focus();
   }
 
-  public filterMenuItems(filter: string): void {
+  public filterMenuItemsAndUpdateQueryParams(filter: string): void {
+    this.filterMenuItems(filter);
+    this.updateQueryParams(filter);
+  }
+
+  private updateQueryParams(filter: string): void {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        [ this.filterKey ]: filter
+      }
+    });
+  }
+
+  private filterMenuItems(filter: string): void {
     this.menu = cloneDeep(menuCategories);
     this.filterValue = filter;
 
