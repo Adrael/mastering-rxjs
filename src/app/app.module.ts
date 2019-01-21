@@ -55,6 +55,8 @@ import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/f
 import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
+import { FakeAsyncTickComponent } from './pages/testing/fake-async-tick/fake-async-tick.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +108,9 @@ import { environment } from '../environments/environment';
     HomeComponent,
     EmptyComponent,
     FirstOrUntilComponent,
-    TakeOrUntilComponent
+    TakeOrUntilComponent,
+    MarbleTestingComponent,
+    FakeAsyncTickComponent
   ],
   imports: [
     FormsModule,

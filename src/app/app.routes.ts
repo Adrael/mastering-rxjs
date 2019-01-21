@@ -38,6 +38,8 @@ import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/beha
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 import { VirtualTimeSchedulerComponent } from './pages/testing/virtual-time-scheduler/virtual-time-scheduler.component';
+import {MarbleTestingComponent} from './pages/testing/marble-testing/marble-testing.component';
+import {FakeAsyncTickComponent} from './pages/testing/fake-async-tick/fake-async-tick.component';
 
 export const APP_ROUTES: Array<Route> = [
   {
@@ -106,12 +108,20 @@ export const APP_ROUTES: Array<Route> = [
     path: 'testing',
     children: [
       {
+        path: 'test',
+        component: TestSchedulerComponent
+      },
+      {
         path: 'virtualTime',
         component: VirtualTimeSchedulerComponent
       },
       {
-        path: 'test',
-        component: TestSchedulerComponent
+        path: 'fakeAsync-tick',
+        component: FakeAsyncTickComponent
+      },
+      {
+        path: 'marble',
+        component: MarbleTestingComponent
       },
       {
         path: '',

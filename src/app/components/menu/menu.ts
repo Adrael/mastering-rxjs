@@ -66,10 +66,10 @@ export const menuCategories: Array<IMenuCategory> = [
       },
       {
         name: 'fakeAsync / tick',
-        link: 'fakeAsyncTick'
+        link: 'fakeAsync-tick'
       },
       {
-        name: 'Marble',
+        name: 'Marble Testing',
         link: 'marble'
       }
     ]
