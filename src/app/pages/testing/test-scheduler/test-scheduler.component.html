@@ -1,3 +1,148 @@
-<p>
-  test-scheduler works!
-</p>
+<div class="container">
+  <app-header title="TestScheduler" category="Testing"></app-header>
+
+  <app-documentation>
+    <p>
+      In RxJS, a <code>Scheduler</code> (the class) is used internally by the Observables to know when to start the
+      execution and emit values. Especially within tests, they can be used to change the "meaning of time", by making
+      the Observables execute synchronously instead of asynchronously, without actually waiting time. We could,
+      for example, decide that <code>500ms</code> in real-world is just <code>50m</code> or even <code>5 ticks</code>
+      of Node event loop.
+    </p>
+
+    <p>
+      By default, Observables use <code>AsyncScheduler</code> which is based on <code>setInterval()</code> for timing,
+      but we can replace it with <code>TestScheduler</code> in our tests.
+      Put simply, the <code>TestScheduler</code> answers the question:
+    </p>
+
+    <ul>
+      <li>What a time frame <kbd>-</kbd> actually means?</li>
+      <li>1 virtual millisecond</li>
+    </ul>
+
+    <p>
+      The <code>TestScheduler</code> exposes a <code>run()</code> function which takes as an argument the callback to
+      be tested.
+    </p>
+
+    <pre class="mb-4"><code class="language-ts">run&lt;T&gt;(callback: (helpers: RunHelpers) =&gt; T): T;</code></pre>
+
+    <p>
+      It will get called with a <code>RunHelpers</code> object that contains function you will use to write your tests.
+    </p>
+
+    <pre class="mb-4"><code class="language-ts">interface RunHelpers &#123;
+    hot: typeof TestScheduler.prototype.createHotObservable;
+    cold: typeof TestScheduler.prototype.createColdObservable;
+    flush: typeof TestScheduler.prototype.flush;
+    expectObservable: typeof TestScheduler.prototype.expectObservable;
+    expectSubscriptions: typeof TestScheduler.prototype.expectSubscriptions;
+&#125;</code></pre>
+
+    <ul>
+      <li class="mb-4">
+        <code>hot(marbleDiagram: string, values?: object, error?: any)</code>
+        <br>Creates a
+        <a href="https://medium.com/@benlesh/hot-vs-cold-observables-f8094ed53339" rel="noreferrer" target="_blank">
+          "hot" observable
+        </a>
+        (like a subject) that will behave as though it's already "running" when the test
+        begins. An interesting difference is that hot marbles allow a ^ character to signal where the "zero frame" is.
+        That is the point at which the subscription to observables being tested begins.
+      </li>
+
+      <li class="mb-4">
+        <code>cold(marbleDiagram: string, values?: object, error?: any)</code>
+        <br>Creates a
+        <a href="https://medium.com/@benlesh/hot-vs-cold-observables-f8094ed53339" rel="noreferrer" target="_blank">
+          "cold" observable
+        </a>
+        whose subscription starts when the test begins.
+      </li>
+
+      <li class="mb-4">
+        <code>flush()</code>
+        <br>Immediately starts virtual time. Not often used since run() will automatically flush for you when your
+        callback returns, but in some cases you may wish to flush more than once or otherwise have more control.
+      </li>
+
+      <li class="mb-4">
+        <code>expectObservable(actual: Observable&lt;T&gt;).toBe(marbleDiagram: string, values?: object, error?: any)</code>
+        <br>Schedules an assertion for when the TestScheduler flushes. Give subscriptionMarbles as parameter to change
+        the schedule of subscription and unsubscription. If you don't provide the subscriptionMarbles parameter it will
+        subscribe at the beginning and never unsubscribe.
+        <a href="https://github.com/ReactiveX/rxjs/blob/master/doc/marble-testing.md#marble-syntax" rel="noreferrer" target="_blank">Read more.</a>
+      </li>
+
+      <li>
+        <code>expectSubscriptions(actualSubscriptionLogs: SubscriptionLog[]).toBe(subscriptionMarbles: string)</code>
+        <br>Like expectObservable schedules an assertion for when the testScheduler flushes. Both cold() and hot()
+        return an observable with a property subscriptions of type SubscriptionLog[]. Give subscriptions as parameter to
+        expectSubscriptions to assert whether it matches the subscriptionsMarbles marble diagram given in toBe().
+        Subscription marble diagrams are slightly different than Observable marble diagrams.
+        <a href="https://github.com/ReactiveX/rxjs/blob/master/doc/marble-testing.md#subscription-marbles" rel="noreferrer" target="_blank">Read more.</a>
+      </li>
+    </ul>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      TestScheduler(assertDeepEqual: (actual: any, expected: any) =&gt; boolean | void);
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      import &#123; interval &#125; from 'rxjs';
+      import &#123; RunHelpers &#125; from 'rxjs/internal/testing/TestScheduler';
+      import &#123; take, throttleTime &#125; from 'rxjs/operators';
+      import &#123; TestScheduler &#125; from 'rxjs/testing';
+      
+      // Simple deep equal assertion.
+      const assertDeepEqual = (actual: any, expected: any): void =&gt; &#123;
+        expect(actual).toEqual(expected);
+      &#125;;
+      
+      describe('RxJS behavior testing', () =&gt; &#123;
+        let scheduler: TestScheduler;
+          
+        beforeEach(() =&gt; &#123;
+          scheduler = new TestScheduler(assertDeepEqual);
+        &#125;);
+      
+        it('generate the stream correctly', () =&gt; &#123;
+          scheduler.run((helpers: RunHelpers) =&gt; &#123;
+            const source$ = helpers.cold('-a--b--c---|');
+            const subscriptions =        '^----------!';
+            const expected =             '-a-----c---|';
+      
+            const piped$ = source$.pipe(throttleTime(3));
+      
+            helpers.expectObservable(piped$).toBe(expected);
+            helpers.expectSubscriptions(source$.subscriptions).toBe(subscriptions);
+          &#125;);
+        &#125;);
+      
+        it('should work for asynchronous tasks too', () =&gt; &#123;
+          scheduler.run((helpers: RunHelpers) =&gt; &#123;
+            const source$ = interval(1000);
+            const piped$ = source$.pipe(take(3));
+            const expected = '1s a 999ms b 999ms (c|)';
+            const expectedValues = &#123; a: 0, b: 1, c: 2 &#125;;
+      
+            helpers.expectObservable(piped$).toBe(expected, expectedValues);
+          &#125;);
+        &#125;);
+      &#125;);
+    </code></pre>
+  </app-example-code>
+
+  <app-resources [resources]="[
+    ['Testing Observables in RxJS6', 'https://blog.jiayihu.net/testing-observables-in-rxjs6/'],
+    ['Findings about RxJS marble testing and the TestScheduler', 'https://itnext.io/findings-about-rxjs-marble-testing-and-the-testscheduler-b23c6bdf6b49'],
+    ['Rx.TestScheduler class', 'https://xgrommx.github.io/rx-book/content/testing/test_scheduler/index.html'],
+    ['Testing', 'https://chrisnoring.gitbooks.io/rxjs-5-ultimate/content/testing.html']
+  ]">
+  </app-resources>
+</div>

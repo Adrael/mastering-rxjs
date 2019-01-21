@@ -14,51 +14,80 @@
 
     <p>The previous marble diagram of .map could be written as:</p>
 
-    <p class="text-center h1 mb-4">
-      <code>
-        -1 ---2 ---3 ---|
-        <br>
-        .map(x => x * 2)
-        <br>
-        -2 ---4 ---6 ---|
-      </code>
-    </p>
+    <pre class="text-center h2 mb-4"><code>-1 ---2 ---3 ---|
+.map(x => 10 * x)
+-10---20---30---|</code></pre>
 
     <p>Every alphanumeric string is considered as an emitted value and hyphens '-' are units of time.</p>
 
-    <p>To be precise:</p>
+    <p>
+      To be precise:
+      <small>
+        <a href="https://github.com/ReactiveX/rxjs/blob/master/doc/marble-testing.md#marble-syntax" rel="noreferrer" target="_blank">
+          (see guide)
+        </a>
+      </small>
+    </p>
 
     <ul>
-      <li><kbd class="mr-1">&nbsp;</kbd> <code>whitespace</code>: horizontal whitespace is ignored and can be used to help vertically align multiple marble diagrams like we did to align the first stream of values</li>
-      <li><kbd class="mr-1">-</kbd> <code>frame</code>: a unit of time</li>
-      <li><kbd class="mr-1">|</kbd> <code>completion</code>: the successful completion of an observable</li>
-      <li><kbd class="mr-1">#</kbd> <code>error</code>: an error terminating the observable</li>
-      <li><kbd class="mr-1">[a-z0-9]</kbd> e.g. 'a' any alphanumeric character: represents a value being emitted</li>
-      <li><kbd class="mr-1">() sync groupings:</kbd> When multiple events need to be in the same frame synchronously, parentheses are used to group those events</li>
+      <li>
+        <kbd class="mr-1">&nbsp;</kbd>&nbsp;<code>whitespace</code>:
+        horizontal whitespace is ignored and can be used to help vertically align multiple marble diagrams like we did
+        to align the first stream of values
+      </li>
+      <li>
+        <kbd class="mr-1">-</kbd>&nbsp;<code>frame</code>: a unit of time
+      </li>
+      <li>
+        <kbd class="mr-1">[0-9]+[ms|s|m]</kbd>&nbsp;<code>time progression</code>: the time progression syntax lets you
+        progress virtual time by a specific amount. It's a number, followed by a time unit of <code>ms</code> (milliseconds),
+        <code>s</code> (seconds), or <code>m</code> (minutes) without any space between them, e.g. <code>a 10ms b</code>.
+        See <a href="https://github.com/ReactiveX/rxjs/blob/master/doc/marble-testing.md#Time-progression-syntax" rel="noreferrer" target="_blank">Time progression syntax</a> for more details.
+      </li>
+      <li>
+        <kbd class="mr-1">|</kbd>&nbsp;<code>completion</code>: the successful completion of an observable
+      </li>
+      <li>
+        <kbd class="mr-1">#</kbd>&nbsp;<code>error</code>: an error terminating the observable
+      </li>
+      <li>
+        <kbd class="mr-1">[a-z0-9]</kbd>&nbsp;<code>any alphanumeric character</code>: represents a value being emitted
+      </li>
+      <li>
+        <kbd class="mr-1">()</kbd>&nbsp;<code>sync groupings</code>:
+        When multiple events need to be in the same frame synchronously, parentheses are used to group those events
+      </li>
     </ul>
   </app-documentation>
 
-  <app-signature>
-    <pre class="my-0"><code class="language-ts">
-      bufferTime&lt;T&gt;(bufferTimeSpan: number, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
-      bufferTime&lt;T&gt;(bufferTimeSpan: number, bufferCreationInterval: number | null | undefined, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
-      bufferTime&lt;T&gt;(bufferTimeSpan: number, bufferCreationInterval: number | null | undefined, maxBufferSize: number, scheduler?: SchedulerLike): OperatorFunction&lt;T, T[]&gt;;
-    </code></pre>
-  </app-signature>
-
   <app-example-code>
     <pre class="my-0 line-numbers"><code class="language-ts">
-      // =&gt; Every 5 seconds, emit the click events from the next 2 seconds
-
-      import &#123; fromEvent &#125; from 'rxjs';
-      import &#123; bufferTime, map &#125; from 'rxjs/operators';
-
-      fromEvent(document, 'click')
-        .pipe(
-          bufferTime(2000, 5000),
-          map((events: Array&lt;MouseEvent&gt;) =&gt; events.length)
-        )
-        .subscribe((value: number) =&gt; console.log(value));
+      import &#123; interval &#125; from 'rxjs';
+      import &#123; Context, marbles &#125; from 'rxjs-marbles/jasmine';
+      import &#123; take, throttleTime &#125; from 'rxjs/operators';
+      
+      describe('RxJS behavior testing', () =&gt; &#123;
+        it('generate the stream correctly', marbles((context: Context) =&gt; &#123;
+          const source$ = context.cold('-a--b--c---|');
+          const subscriptions =        '^----------!';
+          const expected =             '-a-----c---|';
+      
+          const piped$ = source$.pipe(throttleTime(3));
+      
+          context.expect(piped$).toBeObservable(expected);
+          context.expect(source$).toHaveSubscriptions(subscriptions);
+        &#125;));
+      
+        it('should work for asynchronous tasks too', marbles((context: Context) =&gt; &#123;
+          const source$ = interval(1000);
+          const expected = '1s a 999ms b 999ms (c|)';
+          const expectedValues = &#123; a: 0, b: 1, c: 2 &#125;;
+      
+          const piped$ = source$.pipe(take(3));
+      
+          context.expect(piped$).toBeObservable(expected, expectedValues);
+        &#125;));
+      &#125;);
     </code></pre>
   </app-example-code>
 
@@ -67,8 +96,6 @@
     ['Testing Observables in RxJS6', 'https://blog.jiayihu.net/testing-observables-in-rxjs6/'],
     ['Understanding Marble Diagrams for Reactive Streams', 'https://medium.com/@jshvarts/read-marble-diagrams-like-a-pro-3d72934d3ef5'],
     ['Findings about RxJS marble testing and the TestScheduler', 'https://itnext.io/findings-about-rxjs-marble-testing-and-the-testscheduler-b23c6bdf6b49'],
-    ['Rx.TestScheduler class', 'https://xgrommx.github.io/rx-book/content/testing/test_scheduler/index.html'],
-    ['Testing', 'https://chrisnoring.gitbooks.io/rxjs-5-ultimate/content/testing.html'],
     ['Official API Documentation', 'https://github.com/ReactiveX/rxjs/blob/master/doc/marble-testing.md#api']
   ]">
   </app-resources>

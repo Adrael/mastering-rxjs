@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
@@ -10,9 +12,12 @@ import { DocumentationComponent } from './components/documentation/documentation
 import { ExampleCodeComponent } from './components/example-code/example-code.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { ResultsComponent } from './components/results/results.component';
 import { ResourcesComponent } from './components/resources/resources.component';
+import { ResultsComponent } from './components/results/results.component';
 import { SignatureComponent } from './components/signature/signature.component';
+import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/first-or-until.component';
+import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
+import { EmptyComponent } from './pages/empty/empty.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BufferTimeComponent } from './pages/operators/buffer-time/buffer-time.component';
 import { CatchErrorComponent } from './pages/operators/catch-error/catch-error.component';
@@ -45,18 +50,12 @@ import { AnimationFrameSchedulerComponent } from './pages/schedulers/animation-f
 import { AsapSchedulerComponent } from './pages/schedulers/asap-scheduler/asap-scheduler.component';
 import { AsyncSchedulerComponent } from './pages/schedulers/async-scheduler/async-scheduler.component';
 import { QueueSchedulerComponent } from './pages/schedulers/queue-scheduler/queue-scheduler.component';
-import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
-import { VirtualTimeSchedulerComponent } from './pages/testing/virtual-time-scheduler/virtual-time-scheduler.component';
 import { AsyncSubjectComponent } from './pages/subjects/async-subject/async-subject.component';
 import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/behavior-subject.component';
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
-import { EmptyComponent } from './pages/empty/empty.component';
-import { FirstOrUntilComponent } from './pages/custom-operators/first-or-until/first-or-until.component';
-import { TakeOrUntilComponent } from './pages/custom-operators/take-or-until/take-or-until.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { FakeAsyncTickComponent } from './pages/testing/fake-async-tick/fake-async-tick.component';
+import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
+import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +68,6 @@ import { FakeAsyncTickComponent } from './pages/testing/fake-async-tick/fake-asy
     QueueSchedulerComponent,
     AsapSchedulerComponent,
     AnimationFrameSchedulerComponent,
-    VirtualTimeSchedulerComponent,
     TestSchedulerComponent,
     ForkJoinComponent,
     BasePageComponent,

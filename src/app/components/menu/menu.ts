@@ -57,20 +57,16 @@ export const menuCategories: Array<IMenuCategory> = [
     link: '/testing/',
     items: [
       {
+        name: 'Marble Testing',
+        link: 'marble'
+      },
+      {
         name: 'TestScheduler',
         link: 'test'
       },
       {
-        name: 'VirtualTimeScheduler',
-        link: 'virtualTime'
-      },
-      {
         name: 'fakeAsync / tick',
         link: 'fakeAsync-tick'
-      },
-      {
-        name: 'Marble Testing',
-        link: 'marble'
       }
     ]
   },
