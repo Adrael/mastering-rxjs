@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-base-code',
@@ -6,9 +7,20 @@ import {Component} from '@angular/core';
   styleUrls: ['./base-code.component.scss']
 })
 export class BaseCodeComponent {
-  public zoomedIn = false;
+  public zoomFactor = 1;
 
-  public toggleZoom(): void {
-    this.zoomedIn = !this.zoomedIn;
+  constructor(private readonly domSanitizer: DomSanitizer) {
+  }
+
+  public get zoomStyle(): SafeStyle {
+    return this.domSanitizer.bypassSecurityTrustStyle(`font-size: ${this.zoomFactor}rem;`);
+  }
+
+  public zoomIn(): void {
+    this.zoomFactor += .1;
+  }
+
+  public zoomOut(): void {
+    this.zoomFactor -= .1;
   }
 }

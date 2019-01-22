@@ -2,13 +2,13 @@
   <div class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
     &#10004; {{ title }}
 
-    <button class="btn btn-sm btn-warning" (click)="toggleZoom()" [ngSwitch]="zoomedIn">
-      <ng-container *ngSwitchCase="true">Zoom out</ng-container>
-      <ng-container *ngSwitchCase="false">Zoom in</ng-container>
-    </button>
+    <div>
+      <button class="btn btn-sm btn-warning mr-2" (click)="zoomIn()">Zoom in</button>
+      <button class="btn btn-sm btn-warning" (click)="zoomOut()">Zoom out</button>
+    </div>
   </div>
 
-  <div class="card-body px-0 py-0" [class.zoomed-in]="zoomedIn">
+  <div class="card-body px-0 py-0" [style]="zoomStyle">
     <ng-content></ng-content>
   </div>
 </div>
