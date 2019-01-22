@@ -1,7 +1,14 @@
 <div class="card bg-light mb-4">
-  <div class="card-header">&#9757; Example Code</div>
+  <div class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+    &#9757; Example Code
 
-  <div class="card-body px-0 py-0">
+    <button class="btn btn-sm btn-warning" (click)="toggleZoom()" [ngSwitch]="zoomedIn">
+      <ng-container *ngSwitchCase="true">Zoom out</ng-container>
+      <ng-container *ngSwitchCase="false">Zoom in</ng-container>
+    </button>
+  </div>
+
+  <div class="card-body px-0 py-0" [class.zoomed-in]="zoomedIn">
     <ng-content></ng-content>
   </div>
 </div>

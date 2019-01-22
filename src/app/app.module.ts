@@ -56,6 +56,7 @@ import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-s
 import { AngularComponent } from './pages/testing/angular/angular.component';
 import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
+import { BaseCodeComponent } from './components/base-code/base-code.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-sche
     FirstOrUntilComponent,
     TakeOrUntilComponent,
     MarbleTestingComponent,
-    AngularComponent
+    AngularComponent,
+    BaseCodeComponent
   ],
   imports: [
     FormsModule,

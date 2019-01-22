@@ -5,6 +5,15 @@
     Mastering RxJS
   </span>
   <span class="navbar-title col text-center text-uppercase font-weight-bold">A journey to higher grounds</span>
+  <ng-container [ngSwitch]="isLightTheme">
+    <button class="btn btn-dark btn-sm mr-2" *ngSwitchCase="true" (click)="applyDarkTheme()">
+      Switch to Dark Theme
+    </button>
+
+    <button class="btn btn-light btn-sm mr-2" *ngSwitchCase="false" (click)="applyLightTheme()">
+      Switch to Light Theme
+    </button>
+  </ng-container>
 </nav>
 
 <div class="container-fluid">
