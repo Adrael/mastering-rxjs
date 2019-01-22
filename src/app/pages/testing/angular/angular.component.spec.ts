@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FakeAsyncTickComponent } from './fake-async-tick.component';
+import { AngularComponent } from './angular.component';
 
-describe('FakeAsyncTickComponent', () => {
-  let component: FakeAsyncTickComponent;
-  let fixture: ComponentFixture<FakeAsyncTickComponent>;
+describe('AngularComponent', () => {
+  let component: AngularComponent;
+  let fixture: ComponentFixture<AngularComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FakeAsyncTickComponent ]
+      declarations: [ AngularComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FakeAsyncTickComponent);
+    fixture = TestBed.createComponent(AngularComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

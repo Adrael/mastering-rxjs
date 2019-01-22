@@ -65,8 +65,8 @@ export const menuCategories: Array<IMenuCategory> = [
         link: 'test'
       },
       {
-        name: 'fakeAsync / tick',
-        link: 'fakeAsync-tick'
+        name: 'Angular',
+        link: 'angular'
       }
     ]
   },

@@ -1,0 +1,294 @@
+<div class="container">
+  <app-header title="Angular" category="Testing"></app-header>
+
+  <app-documentation>
+    <p>
+      Angular provides us with all the tools we need to start testing our asynchronous code (whether it is Promises,
+      Observables, ...) right out-of-the-box.
+    </p>
+
+    <h4>Macrotasks vs. Microtasks</h4>
+
+    <p>
+      <strong>Macrotasks</strong> are scheduled so the browser can get from its internals into JavaScript/DOM land and
+      ensures these actions happen sequentially. Between tasks, the browser may render updates. Getting from a mouse
+      click to an event callback requires scheduling a task, as does parsing HTML. Macrotasks include:
+    </p>
+
+    <ul>
+      <li><code>setTimeout()</code></li>
+      <li><code>setInterval()</code></li>
+      <li><code>setImmediate()</code></li>
+      <li><code>requestAnimationFrame()</code></li>
+      <li><code>I/O tasks</code></li>
+      <li><code>UI rendering</code></li>
+    </ul>
+
+    <p>
+      <strong>Microtasks</strong> are usually scheduled for things that should happen straight after the currently
+      executing script, such as reacting to a batch of actions, or to make something async without taking the penalty
+      of a whole new task. The microtask queue is processed after callbacks as long as no other JavaScript is
+      mid-execution, and at the end of each task. Any additional microtasks queued during microtasks are added to the
+      end of the queue and also processed. Microtasks include:
+    </p>
+
+    <ul>
+      <li><code>process.nextTick</code></li>
+      <li><code>Promises</code></li>
+      <li><code>Object.observe</code></li>
+      <li><code>MutationObserver</code></li>
+    </ul>
+
+    <p>
+      In summary:
+    </p>
+
+    <ul>
+      <li><code>Macrotasks</code> execute in order, and the browser may render between them</li>
+      <li><code>Microtasks</code> execute in order, and are executed:</li>
+      <ul>
+        <li>after every callback, as long as no other JavaScript is mid-execution</li>
+        <li>at the end of each task</li>
+      </ul>
+    </ul>
+
+    <h4>Back to Angular</h4>
+
+    <p>
+      Meet <code>fakeAsync()</code>, which wraps a function to be executed in the dedicated fakeAsync zone:
+    </p>
+
+    <ul>
+      <li>microtasks are manually executed by calling flushMicrotasks(),</li>
+      <li>timers are synchronous, <code>tick()</code> simulates the asynchronous passage of time.</li>
+    </ul>
+
+    <p>
+      If there are any pending timers at the end of the function, an exception will be thrown.
+    </p>
+
+    <p>
+      Let’s start with a basic example that is available in the Angular documentation:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+          setTimeout(() =&gt; &#123; flag = true; &#125;, 100);
+          expect(flag).toBe(false); // PASSES
+          tick(50);
+          expect(flag).toBe(false); // PASSES
+          tick(50);
+          expect(flag).toBe(true); // PASSES
+      &#125;));
+    </code></pre>
+
+    <p>
+      Notice how the <code>tick()</code> utility is used inside a <code>fakeAsync()</code> block to simulate the passage
+      of time. The argument passed-in to <code>tick()</code> is the number of milliseconds to pass, and these are
+      cumulative within a test.
+    </p>
+
+    <p>
+      <code>tick()</code> can also be used with no argument, in which case it waits until all the microtasks are done
+      (when promises are resolved for example).
+    </p>
+
+    <p>
+      The <code>flag</code> is initially <code>false</code>, but we have a <code>setTimeout</code>
+      (a macrotask, <strong>not</strong> a microtask) that changes the flag after <code>100ms</code>.
+      Time is advanced by <code>50ms</code> and we expect the flag to still be <code>false</code>.
+      Then time is again advanced by another <code>50ms</code> and we expect the <code>flag</code> to be <code>true</code>.
+      This test will pass all of these expectations, because when we expect that the <code>flag</code> is
+      <code>true</code>, <code>100ms</code> of time has passed and the <code>setTimeout</code> has had time to execute
+      its code.
+    </p>
+
+    <p>
+      If we were to do this instead:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+          setTimeout(() =&gt; &#123; flag = true; &#125;, 100);
+          expect(flag).toBe(false); // PASSES
+          flushMicrotasks();
+          expect(flag).toBe(true); // FAILS
+      &#125;));
+    </code></pre>
+
+    <p>
+      The test would fail because a <code>setTimeout</code> is not a microtask.
+      Let’s take a look at an example with a promise:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+
+          Promise.resolve(true).then((result) =&gt; &#123;
+            flag = true;
+          &#125;);
+
+          flushMicrotasks();
+          expect(flag).toBe(true); // PASSES
+      &#125;));
+    </code></pre>
+
+    <p>
+      This time we switch the <code>flag</code> to <code>true</code> inside of a promise callback. Since the promise
+      callback is a microtask, it will be executed when we call <code>flushMicrotasks()</code> and so our test will
+      pass. We could also use <code>tick()</code> instead of <code>flushMicrotasks()</code> and it would still work.
+    </p>
+
+    <p>
+      What about two promises?
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flagOne = false;
+          let flagTwo = false;
+
+          Promise.resolve(true).then((result) =&gt; &#123;
+            flagOne = true;
+          &#125;);
+
+          Promise.resolve(true).then((result) =&gt; &#123;
+            flagTwo = true;
+          &#125;);
+
+          flushMicrotasks();
+          expect(flagOne).toBe(true); // PASSES
+          expect(flagTwo).toBe(true); // PASSES
+      &#125;));
+    </code></pre>
+
+    <p>
+      This test has two flags, and it switches their values inside of two separate promises.
+      We call <code>flushMicrotasks</code> (but we could also call <code>tick()</code>) and then expect them both to be
+      <code>true</code>. This test will also work, because <code>flushMicrotasks()</code> will clear all of the
+      microtasks that are currently in the queue.
+    </p>
+
+    <p>
+      What about observables?
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+          let testObservable = from(Promise.resolve(true));
+      
+          testObservable.subscribe((result) =&gt; &#123;
+            flag = true;
+          &#125;);
+      
+          flushMicrotasks();
+      
+          expect(flag).toBe(true); // PASSES
+      &#125;));
+    </code></pre>
+
+    <p>
+      Yep! That will also work. But now let’s take a look at a more complicated example that won’t work:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+
+          let testPromise = new Promise((resolve) =&gt; &#123;
+            setTimeout(() =&gt; &#123;
+                  resolve(true);
+              &#125;, 3000);
+          &#125;);
+      
+          testPromise.then((result) =&gt; &#123;
+            flag = result;
+          &#125;);
+      
+          expect(flag).toBe(false); // PASSES
+          flushMicrotasks();
+          expect(flag).toBe(true); // FAILS
+      &#125;));
+    </code></pre>
+
+    <p>
+      We are switching the value of <code>flag</code> inside of a promise again, so you might think that this would
+      work if we called <code>flushMicrotasks()</code>. But, inside of the promise we are triggering a new
+      <code>macrotask</code> and the promise will not resolve until the <code>setTimeout</code> triggers,
+      which happens after <code>3000ms</code>.
+    </p>
+
+    <p>
+      In order for this code to work, we would need to use the <code>tick()</code> function instead:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
+          let flag = false;
+
+          let testPromise = new Promise((resolve) =&gt; &#123;
+            setTimeout(() =&gt; &#123;
+                  resolve(true);
+              &#125;, 3000);
+          &#125;);
+      
+          testPromise.then((result) =&gt; &#123;
+            flag = result;
+          &#125;);
+      
+          expect(flag).toBe(false); // PASSES
+          tick(3000);
+          expect(flag).toBe(true); // PASSES
+      &#125;));
+    </code></pre>
+
+    <h4>Also...</h4>
+
+    <p>
+      Specifying the passing time like that can quickly become cumbersome, and can become a problem when you don’t know
+      how much time should pass. A new utility called <code>flush()</code> was introduced in Angular 4.2 and helps with that issue.
+      It basically simulates the passage of time until the macrotask queue is empty.
+    </p>
+
+    <p>
+      So, using <code>flush()</code>, we can write a test like this for example:
+    </p>
+
+    <pre class="mb-4 line-numbers"><code class="language-ts">
+      it('should increment in template', fakeAsync(() =&gt; &#123;
+          debugElement
+            .query(By.css('button.increment'))
+            .triggerEventHandler('click', null);
+        
+          flush();
+          fixture.detectChanges();
+        
+          const value = debugElement.query(By.css('h1')).nativeElement.innerText;
+          expect(value).toEqual('1');
+      &#125;));
+    </code></pre>
+
+    <h4>Conclusion</h4>
+
+    <p class="mb-0">
+      As complex and confusing as this may seem at first, it is actually quite an elegant way to deal with a
+      complicated problem. By using <code>fakeAsync()</code> we can ensure that all of our asynchronous code has run
+      before we make assertions in our tests, and we even have fine tuned control over how we want to advance time
+      throughout the test.
+    </p>
+  </app-documentation>
+
+  <app-resources [resources]="[
+    ['fakeAsync', 'https://angular.io/api/core/testing/fakeAsync'],
+    ['flush', 'https://angular.io/api/core/testing/flush'],
+    ['flushMicrotasks', 'https://angular.io/api/core/testing/flushMicrotasks'],
+    ['Angular Testing: async and fakeAsync', 'https://alligator.io/angular/testing-async-fakeasync/'],
+    ['Testing Asynchronous Code with FakeAsync in Angular', 'https://www.joshmorony.com/testing-asynchronous-code-with-fakeasync-in-angular/'],
+    ['Tasks, microtasks, queues and schedules', 'https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/']
+  ]">
+  </app-resources>
+</div>

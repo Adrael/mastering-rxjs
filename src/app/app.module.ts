@@ -53,7 +53,7 @@ import { QueueSchedulerComponent } from './pages/schedulers/queue-scheduler/queu
 import { AsyncSubjectComponent } from './pages/subjects/async-subject/async-subject.component';
 import { BehaviorSubjectComponent } from './pages/subjects/behavior-subject/behavior-subject.component';
 import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-subject.component';
-import { FakeAsyncTickComponent } from './pages/testing/fake-async-tick/fake-async-tick.component';
+import { AngularComponent } from './pages/testing/angular/angular.component';
 import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 
@@ -108,7 +108,7 @@ import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-sche
     FirstOrUntilComponent,
     TakeOrUntilComponent,
     MarbleTestingComponent,
-    FakeAsyncTickComponent
+    AngularComponent
   ],
   imports: [
     FormsModule,
