@@ -57,6 +57,7 @@ import { AngularComponent } from './pages/testing/angular/angular.component';
 import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 import { BaseCodeComponent } from './components/base-code/base-code.component';
+import { SingleComponent } from './pages/patterns/single/single.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { BaseCodeComponent } from './components/base-code/base-code.component';
     TakeOrUntilComponent,
     MarbleTestingComponent,
     AngularComponent,
-    BaseCodeComponent
+    BaseCodeComponent,
+    SingleComponent
   ],
   imports: [
     FormsModule,

@@ -200,4 +200,15 @@ export const menuCategories: Array<IMenuCategory> = [
       }
     ]
   },
+
+  {
+    name: 'Patterns',
+    link: '/patterns/',
+    items: [
+      {
+        name: 'Single Observable',
+        link: 'single'
+      }
+    ]
+  }
 ];

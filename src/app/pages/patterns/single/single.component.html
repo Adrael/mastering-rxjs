@@ -1,0 +1,75 @@
+<div class="container">
+  <app-header title="Single Observable" category="Patterns"
+              subtitle="Properly state your intention as a developer"></app-header>
+
+  <app-documentation>
+    <p>
+      Why is this type needed?
+    </p>
+
+    <p>
+      Because of the way Observables are implemented in rxjs.
+      Each and every developer who wants to use them has to make sure
+      that the observable gets unsubscribed at some point in the application
+      lifecycle. This is called a Leaky Abstraction.
+    </p>
+
+    <p>
+      With this context in mind, in order to avoid such leaks on our users' devices' memory,
+      we tend to overuse the <code>take(1)</code> pipeable rxjs operator in our codebase.
+    </p>
+
+    <p>
+      For example, given a repository or service which provides an Observable as an output response,
+      it is currently the consumer that gets the inherited responsibility to manage the subscription, thus the memory.
+      At some point, this pattern might break the SRP principle.
+      Indeed, most of the time, the provider knows for sure that the Observable can and will only be consumed once
+      after it has resolved a value. In RxJava, this special kind of Observable is known as Single.
+    </p>
+
+    <p>
+      For this reason, it is the provider's responsibility to ensure the cleaning of the memory, a.k.a <code>take(1)</code>.
+      Unfortunately, we, as JS/TS developers, do not have any way to use such Single observable pattern from rxjs.
+      We can only use regular ones, and equipped with our knowledge of the codebase, we can add this responsibility to
+      our providers.
+    </p>
+
+    <p>
+      But how can we make sure that the next developer who wants to consume our provider's response will know
+      that this memory management has been handled for him out of the box?
+      We have to let him or her know that the <code>take(1)</code> is no longer necessary.
+      This will help us improve our codebase readability, maintainability and usability.
+    </p>
+
+    <p>
+      Meet <strong>Single</strong> (Observable).
+    </p>
+
+    <p>
+      The purpose of this type is doing nothing but visually inform the next developer that memory management
+      has been taken care of.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      import &#123; Observable &#125; from 'rxjs';
+
+      export type SingleObservable&lt;T&gt; = Observable&lt;T&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      public fetchSomething(): SingleObservable&lt;any&gt; &#123;
+          return of(1).pipe(first());
+      &#125;
+    </code></pre>
+  </app-example-code>
+
+  <app-resources [resources]="[
+    ['The Law of Leaky Abstractions', 'https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/'],
+    ['[ReactiveX] Single', 'http://reactivex.io/documentation/single.html']
+  ]">
+  </app-resources>
+</div>

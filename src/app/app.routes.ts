@@ -39,6 +39,7 @@ import { ReplaySubjectComponent } from './pages/subjects/replay-subject/replay-s
 import { AngularComponent } from './pages/testing/angular/angular.component';
 import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
+import {SingleComponent} from './pages/patterns/single/single.component';
 
 export const APP_ROUTES: Array<Route> = [
   {
@@ -273,6 +274,25 @@ export const APP_ROUTES: Array<Route> = [
         path: '**',
         pathMatch: 'full',
         redirectTo: '/operators/bufferTime'
+      }
+    ]
+  },
+  {
+    path: 'patterns',
+    children: [
+      {
+        path: 'single',
+        component: SingleComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/patterns/single'
+      },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/patterns/single'
       }
     ]
   },
