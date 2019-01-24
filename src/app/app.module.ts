@@ -116,6 +116,7 @@ import { BaseCodeComponent } from './components/base-code/base-code.component';
     FormsModule,
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES, {
+      useHash: true,
       scrollPositionRestoration: 'top'
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
