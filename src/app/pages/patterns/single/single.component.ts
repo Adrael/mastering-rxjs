@@ -7,8 +7,4 @@ import {BasePageComponent} from '../../../components/base-page/base-page.compone
   styleUrls: ['./single.component.scss']
 })
 export class SingleComponent extends BasePageComponent {
-
-  public fetchSomething(): SingleObservable<any> {
-    return of(1).pipe(first());
-  }
 }
