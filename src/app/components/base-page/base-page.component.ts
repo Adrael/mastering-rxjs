@@ -3,7 +3,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {IPageComponent} from '../../interfaces/page-component.interface';
 
-declare var Prism: any;
+declare const Prism: any;
 type ObservableLike<T> = Observable<T> | Subject<T>;
 
 @Component({

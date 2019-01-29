@@ -2,7 +2,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "app",
+      "name": "mastering-rxjs",
       "installMode": "prefetch",
       "resources": {
         "files": [

@@ -58,6 +58,9 @@ import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-te
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 import { BaseCodeComponent } from './components/base-code/base-code.component';
 import { SingleComponent } from './pages/patterns/single/single.component';
+import {RequestIdleCallbackService} from './services/request-idle-callback/request-idle-callback.service';
+import {I_REQUEST_IDLE_CALLBACK_SERVICE} from './tokens/request-idle-callback.service.token';
+import { RouterLinkDirective } from './directives/router-link/router-link.directive';
 
 @NgModule({
   declarations: [
@@ -112,7 +115,8 @@ import { SingleComponent } from './pages/patterns/single/single.component';
     MarbleTestingComponent,
     AngularComponent,
     BaseCodeComponent,
-    SingleComponent
+    SingleComponent,
+    RouterLinkDirective
   ],
   imports: [
     FormsModule,
@@ -123,7 +127,12 @@ import { SingleComponent } from './pages/patterns/single/single.component';
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: I_REQUEST_IDLE_CALLBACK_SERVICE,
+      useClass: RequestIdleCallbackService
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {
