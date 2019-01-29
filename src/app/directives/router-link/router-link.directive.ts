@@ -1,4 +1,5 @@
 import {Directive, ElementRef, Inject, Input, OnInit} from '@angular/core';
+import isNil from 'lodash-es/isNil';
 import capitalize from 'lodash-es/capitalize';
 import {I_REQUEST_IDLE_CALLBACK_SERVICE} from '../../tokens/request-idle-callback.service.token';
 import {IRequestIdleCallbackService} from '../../interfaces/request-idle-callback.service.interface';
@@ -51,10 +52,12 @@ export class RouterLinkDirective implements OnInit {
   }
 
   private sendAnalytics(): void {
-    ga('send', 'event', {
-      eventLabel: this.routeDetails.label,
-      eventAction: 'click',
-      eventCategory: this.routeDetails.category
-    });
+    if (!isNil(ga)) {
+      ga('send', 'event', {
+        eventLabel: this.routeDetails.label,
+        eventAction: 'click',
+        eventCategory: this.routeDetails.category
+      });
+    }
   }
 }

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterEvent} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
+import isNil from 'lodash-es/isNil';
 import capitalize from 'lodash-es/capitalize';
 import {Title} from '@angular/platform-browser';
 
@@ -70,6 +71,8 @@ export class AppComponent implements OnInit {
   }
 
   private sendAnalytics(url: string): void {
-    ga('send', 'pageview', url);
+    if (!isNil(ga)) {
+      ga('send', 'pageview', url);
+    }
   }
 }
