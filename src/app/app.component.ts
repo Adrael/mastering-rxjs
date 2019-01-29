@@ -5,6 +5,8 @@ import {DOCUMENT} from '@angular/common';
 import isNil from 'lodash-es/isNil';
 import capitalize from 'lodash-es/capitalize';
 import {Title} from '@angular/platform-browser';
+import { IRequestIdleCallbackService } from './interfaces/request-idle-callback.service.interface';
+import { I_REQUEST_IDLE_CALLBACK_SERVICE } from './tokens/request-idle-callback.service.token';
 
 declare const ga: any;
 
@@ -19,6 +21,7 @@ export class AppComponent implements OnInit {
   private readonly defaultPageTitle = 'Mastering RxJS | A journey to higher grounds';
 
   constructor(@Inject(DOCUMENT) private readonly document: Document,
+              @Inject(I_REQUEST_IDLE_CALLBACK_SERVICE) private readonly requestIdleCallbackService: IRequestIdleCallbackService,
               private readonly router: Router,
               private readonly title: Title) {
   }
@@ -32,8 +35,9 @@ export class AppComponent implements OnInit {
       .subscribe((event: NavigationEnd) => {
         this.hideHomeComponent = (event.urlAfterRedirects !== '/');
 
-        this.sendAnalytics(event.urlAfterRedirects);
         this.updatePageTitle(event.urlAfterRedirects);
+
+        this.requestIdleCallbackService.requestIdleCallback(() => this.sendAnalytics(event.urlAfterRedirects));
       });
   }
 
@@ -71,8 +75,11 @@ export class AppComponent implements OnInit {
   }
 
   private sendAnalytics(url: string): void {
-    if (ga && !isNil(ga)) {
+    try {
       ga('send', 'pageview', url);
+    } catch (error) {
+      console.warn('Analytics not available:', `ga('send', 'pageview', '${url}');`);
+      this.requestIdleCallbackService.requestIdleCallback(() => this.sendAnalytics(url));
     }
   }
 }

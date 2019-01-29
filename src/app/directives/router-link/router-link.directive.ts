@@ -52,12 +52,20 @@ export class RouterLinkDirective implements OnInit {
   }
 
   private sendAnalytics(): void {
-    if (ga && !isNil(ga)) {
+    try {
       ga('send', 'event', {
         eventLabel: this.routeDetails.label,
         eventAction: 'click',
         eventCategory: this.routeDetails.category
       });
+    } catch (error) {
+      console.warn('Analytics not available:', `ga('send', 'event', {
+        eventLabel: '${this.routeDetails.label}',
+        eventAction: 'click',
+        eventCategory: '${this.routeDetails.category}'
+      });`);
+
+      this.requestIdleCallbackService.requestIdleCallback(() => this.sendAnalytics());
     }
   }
 }
