@@ -71,7 +71,8 @@
       Let’s start with a basic example that is available in the Angular documentation:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
           setTimeout(() =&gt; &#123; flag = true; &#125;, 100);
@@ -82,6 +83,7 @@
           expect(flag).toBe(true); // PASSES
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       Notice how the <code>tick()</code> utility is used inside a <code>fakeAsync()</code> block to simulate the passage
@@ -108,7 +110,8 @@
       If we were to do this instead:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
           setTimeout(() =&gt; &#123; flag = true; &#125;, 100);
@@ -117,13 +120,15 @@
           expect(flag).toBe(true); // FAILS
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       The test would fail because a <code>setTimeout</code> is not a microtask.
       Let’s take a look at an example with a promise:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
 
@@ -135,6 +140,7 @@
           expect(flag).toBe(true); // PASSES
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       This time we switch the <code>flag</code> to <code>true</code> inside of a promise callback. Since the promise
@@ -146,7 +152,8 @@
       What about two promises?
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flagOne = false;
           let flagTwo = false;
@@ -164,6 +171,7 @@
           expect(flagTwo).toBe(true); // PASSES
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       This test has two flags, and it switches their values inside of two separate promises.
@@ -176,26 +184,29 @@
       What about observables?
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
           let testObservable = from(Promise.resolve(true));
-      
+
           testObservable.subscribe((result) =&gt; &#123;
             flag = true;
           &#125;);
-      
+
           flushMicrotasks();
-      
+
           expect(flag).toBe(true); // PASSES
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       Yep! That will also work. But now let’s take a look at a more complicated example that won’t work:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
 
@@ -204,16 +215,17 @@
                   resolve(true);
               &#125;, 3000);
           &#125;);
-      
+
           testPromise.then((result) =&gt; &#123;
             flag = result;
           &#125;);
-      
+
           expect(flag).toBe(false); // PASSES
           flushMicrotasks();
           expect(flag).toBe(true); // FAILS
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <p>
       We are switching the value of <code>flag</code> inside of a promise again, so you might think that this would
@@ -226,7 +238,8 @@
       In order for this code to work, we would need to use the <code>tick()</code> function instead:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should test some asynchronous code', fakeAsync(() =&gt; &#123;
           let flag = false;
 
@@ -235,16 +248,17 @@
                   resolve(true);
               &#125;, 3000);
           &#125;);
-      
+
           testPromise.then((result) =&gt; &#123;
             flag = result;
           &#125;);
-      
+
           expect(flag).toBe(false); // PASSES
           tick(3000);
           expect(flag).toBe(true); // PASSES
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <h4>Also...</h4>
 
@@ -258,19 +272,21 @@
       So, using <code>flush()</code>, we can write a test like this for example:
     </p>
 
-    <pre class="mb-4 line-numbers"><code class="language-ts">
+    <app-example-code>
+      <pre class="my-0 line-numbers"><code class="language-ts">
       it('should increment in template', fakeAsync(() =&gt; &#123;
           debugElement
             .query(By.css('button.increment'))
             .triggerEventHandler('click', null);
-        
+
           flush();
           fixture.detectChanges();
-        
+
           const value = debugElement.query(By.css('h1')).nativeElement.innerText;
           expect(value).toEqual('1');
       &#125;));
     </code></pre>
+    </app-example-code>
 
     <h4>Conclusion</h4>
 

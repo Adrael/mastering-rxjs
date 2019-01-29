@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   private sendAnalytics(url: string): void {
-    if (!isNil(ga)) {
+    if (ga && !isNil(ga)) {
       ga('send', 'pageview', url);
     }
   }

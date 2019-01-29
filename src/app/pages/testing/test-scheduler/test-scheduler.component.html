@@ -26,19 +26,23 @@
       be tested.
     </p>
 
-    <pre class="mb-4"><code class="language-ts">run&lt;T&gt;(callback: (helpers: RunHelpers) =&gt; T): T;</code></pre>
+    <app-example-code>
+      <pre class="my-0"><code class="language-ts">run&lt;T&gt;(callback: (helpers: RunHelpers) =&gt; T): T;</code></pre>
+    </app-example-code>
 
     <p>
       It will get called with a <code>RunHelpers</code> object that contains function you will use to write your tests.
     </p>
 
-    <pre class="mb-4"><code class="language-ts">interface RunHelpers &#123;
+    <app-example-code>
+      <pre class="my-0"><code class="language-ts">interface RunHelpers &#123;
     hot: typeof TestScheduler.prototype.createHotObservable;
     cold: typeof TestScheduler.prototype.createColdObservable;
     flush: typeof TestScheduler.prototype.flush;
     expectObservable: typeof TestScheduler.prototype.expectObservable;
     expectSubscriptions: typeof TestScheduler.prototype.expectSubscriptions;
 &#125;</code></pre>
+    </app-example-code>
 
     <ul>
       <li class="mb-4">

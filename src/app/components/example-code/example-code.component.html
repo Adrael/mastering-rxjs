@@ -1,10 +1,14 @@
-<div class="card bg-light mb-4">
+<div class="card bg-light mb-4" [class.focused]="isFocused">
   <div class="card-header d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-    &#9757; Example Code
+    &#9757; Code
 
     <div>
       <button class="btn btn-sm btn-warning mr-2" (click)="zoomIn()">Zoom in</button>
-      <button class="btn btn-sm btn-warning" (click)="zoomOut()">Zoom out</button>
+      <button class="btn btn-sm btn-warning mr-2" (click)="zoomOut()">Zoom out</button>
+      <button class="btn btn-sm btn-dark" (click)="toggleFocus()">
+        <ng-container *ngIf="isFocused">Quit</ng-container>
+        Focus
+      </button>
     </div>
   </div>
 

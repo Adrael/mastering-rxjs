@@ -52,7 +52,7 @@ export class RouterLinkDirective implements OnInit {
   }
 
   private sendAnalytics(): void {
-    if (!isNil(ga)) {
+    if (ga && !isNil(ga)) {
       ga('send', 'event', {
         eventLabel: this.routeDetails.label,
         eventAction: 'click',
