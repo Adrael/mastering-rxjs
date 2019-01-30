@@ -25,11 +25,8 @@
     <pre class="my-0 line-numbers"><code class="language-ts">
       import &#123; asapScheduler, asyncScheduler &#125; from 'rxjs';
 
-      const firstScheduledTask = asyncScheduler.schedule(() =&gt; console.log('async resolved!'));
-      this.plug(firstScheduledTask);
-
-      const secondScheduledTask = asapScheduler.schedule(() =&gt; console.log('asap resolved!'));
-      this.plug(secondScheduledTask);
+      asyncScheduler.schedule(() =&gt; console.log('async resolved!'));
+      asapScheduler.schedule(() =&gt; console.log('asap resolved!'));
 
       // Output: asap resolved!  =&gt; asap goes first!
       // Output: async resolved!
