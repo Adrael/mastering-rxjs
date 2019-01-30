@@ -40,6 +40,7 @@ import { AngularComponent } from './pages/testing/angular/angular.component';
 import { MarbleTestingComponent } from './pages/testing/marble-testing/marble-testing.component';
 import { TestSchedulerComponent } from './pages/testing/test-scheduler/test-scheduler.component';
 import {SingleComponent} from './pages/patterns/single/single.component';
+import {PluckComponent} from './pages/operators/pluck/pluck.component';
 
 export const APP_ROUTES: Array<Route> = [
   {
@@ -224,6 +225,10 @@ export const APP_ROUTES: Array<Route> = [
       {
         path: 'of',
         component: OfComponent
+      },
+      {
+        path: 'pluck',
+        component: PluckComponent
       },
       {
         path: 'reduce',

@@ -144,6 +144,10 @@ export const menuCategories: Array<IMenuCategory> = [
         link: 'of'
       },
       {
+        name: 'pluck',
+        link: 'pluck'
+      },
+      {
         name: 'reduce',
         link: 'reduce'
       },

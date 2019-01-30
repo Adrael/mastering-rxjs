@@ -1,0 +1,51 @@
+<div class="container">
+  <app-header title="pluck()" category="Operators" subtitle="Simpler <code>map()</code>"></app-header>
+
+  <app-documentation marble="/assets/operators/pluck.png">
+    <p>
+      <code>pluck()</code> maps each source value (an object) to its specified nested property.
+    </p>
+
+    <p>
+      Like <code>map()</code>, but meant only for picking one of the nested properties of every emitted object.
+    </p>
+  </app-documentation>
+
+  <app-signature>
+    <pre class="my-0"><code class="language-ts">
+      pluck&lt;T, R&gt;(...properties: string[]): OperatorFunction&lt;T, R&gt;;
+    </code></pre>
+  </app-signature>
+
+  <app-example-code>
+    <pre class="my-0 line-numbers"><code class="language-ts">
+      // =&gt; Pluck nested properties
+
+      import &#123; from &#125; from 'rxjs';
+      import &#123; filter, pluck &#125; from 'rxjs/operators';
+      import isNil from 'lodash-es/isNil';
+
+      from([
+        &#123;name: 'Joe', age: 30, job: &#123;title: 'Developer', language: 'JavaScript'}},
+        &#123;name: 'Sarah', age: 35&#125;
+      ])
+      .pipe(
+        pluck('job', 'title'),
+        filter((job: string) =&gt; !isNil(job))
+      )
+      .subscribe((value: number) =&gt; console.log(value));
+
+      // Output: Developer
+    </code></pre>
+  </app-example-code>
+
+  <app-results [results]="results" [isRunning]="isRunning" (onStop)="stop()" (onStart)="start()"></app-results>
+
+  <app-resources [resources]="[
+    ['[RxJS] Official Documentation', 'https://rxjs.dev/api/operators/pluck'],
+    ['[ReactiveX] pluck', 'http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-pluck'],
+    ['[Learn RxJS] pluck', 'https://www.learnrxjs.io/operators/transformation/pluck.html'],
+    ['[RxJS Marbles] pluck', 'http://rxmarbles.com/#pluck']
+  ]">
+  </app-resources>
+</div>

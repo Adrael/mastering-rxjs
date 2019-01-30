@@ -61,6 +61,7 @@ import { SingleComponent } from './pages/patterns/single/single.component';
 import {RequestIdleCallbackService} from './services/request-idle-callback/request-idle-callback.service';
 import {I_REQUEST_IDLE_CALLBACK_SERVICE} from './tokens/request-idle-callback.service.token';
 import { RouterLinkDirective } from './directives/router-link/router-link.directive';
+import { PluckComponent } from './pages/operators/pluck/pluck.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { RouterLinkDirective } from './directives/router-link/router-link.direct
     AngularComponent,
     BaseCodeComponent,
     SingleComponent,
-    RouterLinkDirective
+    RouterLinkDirective,
+    PluckComponent
   ],
   imports: [
     FormsModule,
